@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Serviços Flumen Consultoria</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --card-bg-overlay: rgba(16, 53, 88, 0.6);
+    }
+    .hero-services {
+      background: url('imagens/rio-hero.jpg') center/cover no-repeat;
+      position: relative;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+    .hero-services::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(16, 53, 88, 0.7);
+    }
+    .hero-services .container {
+      position: relative; z-index: 1;
+    }
+    .hero-services h1 {
+      font-family: var(--fonte-titulo);
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+    .hero-services p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      color: #ffd54f;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 60px 20px;
+    }
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      background: #fff;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+    }
+    .service-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .service-card .content {
+      padding: 20px;
+      position: relative;
+      background: #fff;
+    }
+    .service-card h3 {
+      margin: 0 0 0.5rem;
+      font-family: var(--fonte-titulo);
+      color: var(--cor-azul-escuro);
+      font-size: 1.5rem;
+    }
+    .service-card p,
+    .service-card ul {
+      font-size: 0.95rem;
+      color: var(--cor-texto-escuro);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .service-card ul {
+      list-style: inside disc;
+      max-height: 6rem;
+      overflow: hidden;
+      position: relative;
+      padding-left: 1rem;
+    }
+    .service-card ul::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2rem;
+      background: linear-gradient(transparent, #fff);
+    }
+    .service-card a.more {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: var(--cor-azul-medio);
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .service-card a.more:hover {
+      color: var(--cor-verde-destaque);
+    }
+  </style>
+</head>
+<body>
+  <header class="header">…</header>
+  <main>
+    <!-- Hero -->
+    <section class="hero-services">
+      <div class="container">
+        <h1>Serviços</h1>
+        <p>Buscando a multiplicidade de seus serviços, a Flumen mantém parcerias com colaboradores das mais diversas áreas das ciências naturais.</p>
+      </div>
+    </section>
+
+    <!-- Grid de Cards de Serviços -->
+    <section class="services-grid">
+      <!-- Biodiversidade -->
+      <div class="service-card">
+        <img src="imagens/bio-flora-fauna.jpg" alt="Biodiversidade da Flora e Fauna Aquática">
+        <div class="content">
+          <h3>Biodiversidade Aquática</nobr></h3>
+          <ul>
+            <li>Estudos taxonômicos fitoplanctônicos</li>
+            <li>Biocenose zooplanctônica e ictioplanctônica</li>
+            <li>Macroinvertebrados e malacofauna</li>
+            <li>Testes de ecotoxicidade e cianotoxinas</li>
+          </ul>
+          <a href="biodiversidade.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+
+      <!-- Qualidade da Água -->
+      <div class="service-card">
+        <img src="imagens/agua.jpg" alt="Qualidade de Água Superficial e Subterrânea">
+        <div class="content">
+          <h3>Qualidade de Água</h3>
+          <ul>
+            <li>Coleta e análise físico-química</li>
+            <li>Análises estatísticas</li>
+            <li>Monitoramento preventivo contínuo</li>
+          </ul>
+          <a href="qualidade-agua.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+
+      <!-- Sedimentos -->
+      <div class="service-card">
+        <img src="imagens/sedimentos.jpg" alt="Qualidade de Sedimentos">
+        <div class="content">
+          <h3>Sedimentos</h3>
+          <ul>
+            <li>Coleta de sedimentos</li>
+            <li>Análise granulométrica</li>
+            <li>Relatórios físico-químicos</li>
+          </ul>
+          <a href="sedimentos.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+
+      <!-- Análises Integradas -->
+      <div class="service-card">
+        <img src="imagens/integradas.jpg" alt="Análises Integradas">
+        <div class="content">
+          <h3>Análises Integradas</h3>
+          <ul>
+            <li>Análise de Risco Ecológico</li>
+            <li>Índices multicritérios (PAR, ARE)</li>
+            <li>Geomorfologia de Rios e Lagos</li>
+          </ul>
+          <a href="analises-integradas.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+
+      <!-- Modelagem Matemática -->
+      <div class="service-card">
+        <img src="imagens/modelagem.jpg" alt="Modelagem Matemática">
+        <div class="content">
+          <h3>Modelagem Matemática</h3>
+          <ul>
+            <li>Autodepuração de rios</li>
+            <li>Capacidade suporte hídrico</li>
+          </ul>
+          <a href="modelagem.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+
+      <!-- Restauração Fluvial -->
+      <div class="service-card">
+        <img src="imagens/restauracao.jpg" alt="Restauração Fluvial">
+        <div class="content">
+          <h3>Restauração Fluvial</h3>
+          <ul>
+            <li>Projetos de Engenharia Natural</li>
+            <li>Recuperação de Nascentes</li>
+            <li>Monitoramento de Projetos</li>
+          </ul>
+          <a href="restauracao.html" class="more">Saiba mais →</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <footer class="footer">…</footer>
+</body>
+</html>
