@@ -85,13 +85,19 @@ body {
 }
 
 /* === HAMBÚRGUER (MOBILE) === */
+/* === HAMBÚRGUER (MOBILE) – ajustado === */
 .hamburger {
   display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
   flex-direction: column;
   cursor: pointer;
   background: none;
   border: none;
 }
+
 .hamburger .bar {
   width: 28px;
   height: 3px;
@@ -493,21 +499,47 @@ section:nth-child(odd) {
 
 /* === RESPONSIVIDADE (MOBILE) === */
 @media (max-width: 768px) {
+  .header {
+    position: relative;
+  }
+
   .hamburger {
     display: flex;
+    position: absolute;
+    top: 50%;
+    right: 60px;        /* distanciado da borda direita: ajusta esse valor pra posicionar */
+    left: auto;         /* remove qualquer left anterior */
+    transform: translateY(-50%);
+    z-index: 1002;
+    background: none;
+    border: none;
   }
+
+  /* Ajusta a cor das barras para o tom correto */
+  .hamburger .bar {
+    background-color: var(--cor-azul-escuro);
+  }
+
+  /* Painel de navegação atrás do X */
   .nav-menu {
     position: fixed;
-    top: 80px; left: -100%;
-    width: 100%; height: calc(100vh - 80px);
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
     background-color: var(--cor-fundo-claro);
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     transition: left 0.3s ease-in-out;
+    z-index: 1001;
   }
   .nav-menu.active {
     left: 0;
   }
+
+  /* Itens do menu */
   .nav-list {
     flex-direction: column;
     text-align: center;
@@ -516,15 +548,19 @@ section:nth-child(odd) {
   .nav-link {
     font-size: 1.5rem;
   }
+
+  /* Transformação das barras em “X” */
   .hamburger.active .bar:nth-child(2) {
     opacity: 0;
   }
   .hamburger.active .bar:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(6px) rotate(45deg);
   }
   .hamburger.active .bar:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-6px) rotate(-45deg);
   }
+
+  /* Restante do responsivo, sem alterações */
   #sobre .section-content,
   .presentation-content {
     flex-direction: column;
@@ -611,7 +647,7 @@ details summary {
 
 /* Fonte um pouco maior nos itens da lista */
 details ol {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 /* ===== Azul médio para subtítulo e detalhes ===== */
@@ -629,3 +665,6 @@ details ol {
 #servicos details summary::before {
   color: var(--cor-azul-escuro);
 }
+
+
+
