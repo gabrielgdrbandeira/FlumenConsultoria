@@ -538,3 +538,94 @@ section:nth-child(odd) {
     grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
   }
 }
+
+/* ===== Adições para servicos.html ===== */
+
+/* Fundo branco para a seção de serviços */
+#servicos {
+  background-color: var(--cor-branco);
+}
+
+/* Aumenta fonte dos títulos e listas */
+details summary {
+  font-size: 1.3rem;
+}
+details ol {
+  font-size: 1.15rem;
+}
+
+/* Estiliza o acordeão */
+details summary {
+  padding: 12px 20px;
+  cursor: pointer;
+  background-color: var(--cor-branco);
+  border-radius: 5px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary:before {
+  content: "\f054";              /* fa-chevron-right */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  transition: transform 0.3s;
+}
+details[open] summary:before {
+  transform: rotate(90deg);
+}
+
+/* Destaque ao conteúdo aberto */
+details[open] ol {
+  background-color: rgba(255,255,255,0.9);
+  padding: 15px 25px;
+  border-left: 4px solid var(--cor-azul-medio);
+  margin-bottom: 20px;
+}
+
+/* Transição suave */
+details ol {
+  margin: 10px 0 20px;
+  padding-left: 1.2em;
+  line-height: 1.8;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+details ol li + li {
+  margin-top: 1em;
+}
+details[open] ol {
+  max-height: 1000px;
+}
+
+/* ===== Ajustes de tamanho e cor para servicos.html ===== */
+
+/* Fonte maior e azul escuro nos títulos de <summary> */
+details summary {
+  font-size: 1.5rem;
+}
+
+/* Fonte um pouco maior nos itens da lista */
+details ol {
+  font-size: 1.2rem;
+}
+
+/* ===== Azul médio para subtítulo e detalhes ===== */
+#servicos .section-subtitle {
+  color: var(--cor-azul-medio);
+}
+
+#servicos details ol {
+  color: var(--cor-azul-medio);
+}
+
+/* ===== Ícone e texto do summary em azul escuro ===== */
+#servicos details summary,
+#servicos details summary i,
+#servicos details summary::before {
+  color: var(--cor-azul-escuro);
+}
