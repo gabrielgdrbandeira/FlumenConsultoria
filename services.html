@@ -1,12 +1,13 @@
-<!-- servicos.html -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Serviços – Flumen Consultoria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serviços - Flumen Consultoria</title>
 
-  <link rel="stylesheet" href="styles.css">
+  <!-- Swiper CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="services.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Questrial&display=swap" rel="stylesheet">
@@ -17,9 +18,7 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container">
-      <a href="index.html" class="logo">
-        <img src="imagens/13.png" alt="Flumen Consultoria Logo">
-      </a>
+      <a href="index.html" class="logo"><img src="imagens/13.png" alt="Flumen Consultoria Logo"></a>
       <nav class="nav-menu">
         <ul class="nav-list">
           <li><a href="index.html" class="nav-link">Início</a></li>
@@ -37,108 +36,122 @@
     </div>
   </header>
 
-  <!-- MAIN -->
-  <main>
-    <section id="servicos">
-      <div class="container">
-        <h2 class="section-title">Serviços</h2>
-        <p class="section-subtitle">
-          Buscando a multiplicidade de seus serviços, a Flumen mantém parcerias com colaboradores
-          das mais diversas áreas das ciências naturais.
-        </p>
+  <!-- SEÇÃO SERVIÇOS -->
+  <section id="servicos" class="servicos">
+    <div class="container">
+      <h2 class="section-title">Serviços</h2>
+      <p class="section-subtitle">
+        Buscando a multiplicidade de seus serviços, a Flumen mantém parcerias com colaboradores
+        das mais diversas áreas das ciências naturais. Clique na seta abaixo e descubra todos os serviços
+        que nós podemos te oferecer!
+      </p>
 
-        <!-- Acordeão de serviços usando <details>, todas fechadas -->
-        <details>
-          <summary><i class="fas fa-water"></i> Biodiversidade da Flora e Fauna Aquática</summary>
-          <ol>
-            <li>Estudos taxonômicos da biocenose fitoplanctônica</li>
-            <li>Estudos taxonômicos da biocenose fitoperifítica</li>
-            <li>Estudos taxonômicos da biocenose zooplanctônica</li>
-            <li>Estudos taxonômicos da biocenose ictioplântonica</li>
-            <li>Estudos taxonômicos da biocenose de macroinvertebrados aquáticos</li>
-            <li>Estudos da malacofauna</li>
-            <li>Teste de cercárias em malacofauna</li>
-            <li>Estudos de vetores de doenças de veiculação hídrica</li>
-            <li>Estudos taxonômicos da biocenose de macrófitas aquáticas</li>
-            <li>Estudos taxonômicos da biocenose de cianobactérias</li>
-            <li>Análise de cianotoxinas</li>
-            <li>Estudos de ecotoxicidade aguda e crônica</li>
-            <li>Monitoramento de larvas e adultos de Mexilhão Dourado</li>
-            <li>Coleta das amostras biológicas</li>
-            <li>Elaboração de relatórios técnicos</li>
-          </ol>
-        </details>
+      <div class="swiper servicesSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-water"></i> Biodiversidade da Flora e Fauna Aquática</h3>
+              <ul>
+                <li>Estudos taxonômicos da biocenose fitoplanctônica</li>
+                <li>Estudos taxonômicos da biocenose fitoperifítica</li>
+                <li>Estudos taxonômicos da biocenose zooplanctônica</li>
+                <li>Estudos taxonômicos da biocenose ictioplântonica</li>
+                <li>Estudos taxonômicos da biocenose de macroinvertebrados aquáticos</li>
+                <li>Estudos da malacofauna</li>
+                <li>Teste de cercárias em malacofauna</li>
+                <li>Estudos de vetores de doenças de veiculação hídrica</li>
+                <li>Estudos taxonômicos da biocenose de macrófitas aquáticas</li>
+                <li>Estudos taxonômicos da biocenose de cianobactérias</li>
+                <li>Análise de cianotoxinas</li>
+                <li>Estudos de ecotoxicidade aguda e crônica</li>
+                <li>Monitoramento de larvas e adultos de Mexilhão Dourado</li>
+                <li>Coleta das amostras biológicas</li>
+                <li>Elaboração de relatórios técnicos</li>
+              </ul>
+            </div>
+          </div>
 
-        <details>
-          <summary><i class="fas fa-tint"></i> Qualidade de Água Superficial e Subterrânea</summary>
-          <ol>
-            <li>Coleta de amostras de águas superficiais</li>
-            <li>Relatório técnico de aspectos físicos e químicos</li>
-            <li>Análises estatísticas</li>
-          </ol>
-        </details>
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-tint"></i> Qualidade de Água Superficial e Subterrânea</h3>
+              <ul>
+                <li>Coleta de amostras de águas superficiais</li>
+                <li>Relatório técnico de aspectos físicos e químicos</li>
+                <li>Análises estatísticas</li>
+              </ul>
+            </div>
+          </div>
 
-        <details>
-          <summary><i class="fas fa-layer-group"></i> Qualidade de Sedimentos</summary>
-          <ol>
-            <li>Coleta de sedimentos</li>
-            <li>Análise granulométrica</li>
-            <li>Relatório técnico de aspectos físicos e químicos</li>
-          </ol>
-        </details>
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-layer-group"></i> Qualidade de Sedimentos</h3>
+              <ul>
+                <li>Coleta de sedimentos</li>
+                <li>Análise granulométrica</li>
+                <li>Relatório técnico de aspectos físicos e químicos</li>
+              </ul>
+            </div>
+          </div>
 
-        <details>
-          <summary><i class="fas fa-project-diagram"></i> Análises Integradas</summary>
-          <ol>
-            <li>Análise de Risco Ecológico (ARE)</li>
-            <li>Índices ecossistêmicos multicritérios</li>
-            <li>Protocolos de Avaliação Rápida de Habitats (PAR)</li>
-            <li>Caracterização geomorfológica de rios e lagoas</li>
-          </ol>
-        </details>
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-project-diagram"></i> Análises Integradas</h3>
+              <ul>
+                <li>Análise de Risco Ecológico (ARE)</li>
+                <li>Índices ecossistêmicos multicritérios</li>
+                <li>Protocolos de Avaliação Rápida de Habitats (PAR)</li>
+                <li>Caracterização geomorfológica de rios e lagoas</li>
+              </ul>
+            </div>
+          </div>
 
-        <details>
-          <summary><i class="fas fa-calculator"></i> Modelagem Matemática</summary>
-          <ol>
-            <li>Modelagem de autodepuração de rios</li>
-            <li>Modelagem de capacidade suporte</li>
-          </ol>
-        </details>
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-calculator"></i> Modelagem Matemática</h3>
+              <ul>
+                <li>Modelagem de autodepuração de rios</li>
+                <li>Modelagem de capacidade suporte</li>
+              </ul>
+            </div>
+          </div>
 
-        <details>
-          <summary><i class="fas fa-seedling"></i> Restauração Fluvial</summary>
-          <ol>
-            <li>Projetos de Restauração Fluvial e Áreas úmidas</li>
-            <li>Avaliação técnica de projetos de restauração</li>
-            <li>Monitoramento em projetos de restauração</li>
-            <li>Projetos de recuperação de nascentes</li>
-          </ol>
-        </details>
+          <div class="swiper-slide">
+            <div class="service-card">
+              <h3><i class="fas fa-seedling"></i> Restauração Fluvial</h3>
+              <ul>
+                <li>Projetos de Restauração Fluvial e Áreas úmidas</li>
+                <li>Avaliação técnica de projetos de restauração</li>
+                <li>Monitoramento em projetos de restauração</li>
+                <li>Projetos de recuperação de nascentes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-col">
-        <img src="imagens/17.png" alt="Flumen Consultoria Logo" class="footer-logo">
-      </div>
+      <div class="footer-col"><img src="imagens/17.png" alt="Logo" class="footer-logo"></div>
       <div class="footer-col">
         <h4>Contato</h4>
-        <p>
-          <i class="fas fa-map-marker-alt"></i> Avenida do Contorno 2905 sala 1106 – Bairro Santa Efigênia, Belo Horizonte/MG<br>
-          <i class="fas fa-phone"></i> (31) 99934-3254<br>
-          <i class="fas fa-envelope"></i> flumen@flumenconsultoria.com.br
+        <p><i class="fas fa-map-marker-alt"></i> Avenida do Contorno 2905 sala 1106 – Belo Horizonte/MG<br>
+           <i class="fas fa-phone"></i> (31) 99934-3254<br>
+           <i class="fas fa-envelope"></i> flumen@flumenconsultoria.com.br
         </p>
       </div>
       <div class="footer-col">
         <h4>Siga-nos</h4>
         <div class="social-links">
-          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -147,6 +160,8 @@
     </div>
   </footer>
 
+  <!-- Swiper Library -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
