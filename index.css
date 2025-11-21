@@ -2,6 +2,7 @@
 :root {
   --cor-fundo-claro: #dcf4ff;
   --cor-azul-medio: #0299ca;
+  --cor-azul-medio-escuro: #096791;
   --cor-azul-escuro: #103558;
   --cor-verde-destaque: #5ab334;
   --cor-branco: #ffffff;
@@ -268,9 +269,9 @@ section:nth-child(odd) { background-color:#f9f9f9; }
 
 /* === FOOTER ATUALIZADO === */
 .footer {
-  background-color: var(--cor-azul-escuro);
+  background-color: var(--cor-azul-medio-escuro);
   color: var(--cor-azul-medio);
-  padding: 60px 0 30px;
+  padding: 50px 0 20px;
   border-top: 1px solid var(--cor-verde-destaque);
 }
 .footer .container {
@@ -282,7 +283,7 @@ section:nth-child(odd) { background-color:#f9f9f9; }
   text-align: center;
 }
 .footer-logo {
-  height: 200px;
+  height: 230px;
   margin-bottom: 1rem;
 }
 .footer-col h4 {
@@ -300,9 +301,13 @@ section:nth-child(odd) { background-color:#f9f9f9; }
 .footer-col i {
   margin-right: 8px;
 }
+.social-links i {
+  font-size: 2rem; /* Ajuste o valor */
+}
+
 .social-links a {
-  font-size: 2rem;
-  margin: 0 0.5rem;
+  font-size: 3rem;
+  margin: 0 1rem;
   transition: transform 0.3s ease,color 0.3s ease;
 }
 .social-links a:hover {
