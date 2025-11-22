@@ -45,8 +45,8 @@ body {
   align-items: center;
 }
 .logo img {
-  height: 150px;
-  padding-top: 15px;
+  height: 185px;
+  padding-top: 25px;
   transition: transform 0.3s ease-in-out;
 }
 .logo img:hover { transform: scale(1.05); }
@@ -133,92 +133,129 @@ section:nth-child(odd) { background-color:#f9f9f9; }
 
 /* === HERO === */
 .hero{
-  position: relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  height:600px;
-  background:
-    linear-gradient(rgba(16,53,88,0.75), rgba(16,53,88,0.7)),
-    url('imagens/FUNDO-INICIO.jpeg') center/cover no-repeat;
-  padding:0;
-  color:var(--cor-branco);
-  overflow: hidden;
+ position: relative;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ align-items:center;
+ text-align:center;
+ height:600px;
+ padding:0;
+ color:var(--cor-branco);
+ overflow: hidden;
+ padding-bottom: 0; /* Adicionado: Remove o padding inferior se houver */
+}
+.hero .container {
+ /* Garante que o conteúdo (texto) fique acima do vídeo e do overlay */
+ position: relative;
+ z-index: 10;
 }
 .hero h1 {
-  font-family:var(--fonte-titulo);
-  font-size:3.5rem;
-  margin-bottom:23px;
-  position: relative;
-  z-index: 2;
+ font-family:var(--fonte-titulo);
+ font-size:3.5rem;
+ margin-bottom:23px;
+ position: relative;
+ z-index: 2;
+ color: var(--cor-branco);
 }
 .hero p {
-  font-size:1.4rem;
-  margin:0 auto 40px;
-  max-width:800px;
-  position: relative;
-  z-index: 2;
+ font-size:1.4rem;
+ margin:0 auto 40px;
+ max-width:800px;
+ position: relative;
+ z-index: 2;
+ color: var(--cor-branco); /* Alterado/Confirmado: Texto em branco para legibilidade sobre o overlay */
 }
 .hero .btn {
+ position: relative;
+ z-index: 2;
+}
+/* --- ESTILOS DO VÍDEO DE FUNDO --- */
+.video-background {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ overflow: hidden;
+ z-index: 1; /* Fica atrás do overlay e do conteúdo */
+}
+
+.video-background video {
+ width: 100%;
+ height: 100%;
+ object-fit: cover; /* Garante que o vídeo cubra toda a área sem distorcer */
+}
+
+/* --- ESTILOS DO OVERLAY ESCURO --- */
+.overlay {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 5; /* Fica entre o vídeo e o conteúdo */
+ /* Este é o seu gradiente escuro: */
+ background: linear-gradient(rgba(16,53,88,0.25), rgba(16,53,88,0.25)); 
+}
+
+/* === EFEITO DE ONDAS MODERNO (NOVO DIVISOR) === */
+
+/* Removemos a regra .hero .waves para que ele não fique mais em position: absolute */
+.waves-divider { 
   position: relative;
-  z-index: 2;
+ width: 100%;
+ height: 120px;
+ margin-top: -1px; /* Remove pequeno gap com o Hero */
+ overflow: hidden;
+ /* Define o background do divisor com a cor do background da próxima seção (#sobre) */
+ background-color: var(--cor-branco); 
 }
 
-/* === EFEITO DE ONDAS MODERNO === */
-.hero .waves {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  overflow: hidden;
-  z-index: 1;
+.waves-divider .wave-layer {
+position: absolute; /* Alterado de absolute para relativo (dentro do fluxo) */
+bottom: 0;
+left: 0;
+width: 200%;
+height: 100%;
+display: flex;
+animation: wave-flow 4s linear infinite;
 }
 
-.hero .wave-layer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  display: flex;
-  animation: wave-flow 4s linear infinite;
+.waves-divider .wave-layer svg {
+width: 50%;
+height: 100%;
+flex-shrink: 0;
 }
 
-.hero .wave-layer svg {
-  width: 50%;
-  height: 100%;
-  flex-shrink: 0;
+/* Ordem de Empilhamento Corrigida (Layer 2 na frente para ser visível) */
+.waves-divider .wave-layer-1 {
+animation-duration: 4s;
+z-index: 1; /* Vai para o fundo */
+opacity: 1; /* Reduzindo a opacidade no CSS para permitir a visualização de outros layers */
 }
 
-.hero .wave-layer-1 {
-  animation-duration: 4s;
-  z-index: 3;
+.waves-divider .wave-layer-2 {
+animation-duration: 3.5s;
+animation-delay: -1s;
+z-index: 3; /* Vai para a frente para garantir a visibilidade do azul */
+opacity: 0.5; /* Garante que a opacidade no CSS não a esconda */
 }
 
-.hero .wave-layer-2 {
-  animation-duration: 3.5s;
-  animation-delay: -1s;
-  z-index: 2;
-  opacity: 0.85;
-}
-
-.hero .wave-layer-3 {
-  animation-duration: 5s;
-  animation-delay: -2s;
-  z-index: 1;
-  opacity: 0.7;
+.waves-divider .wave-layer-3 {
+animation-duration: 5s;
+animation-delay: -2s;
+z-index: 2; /* Fica no meio */
+opacity: 1; /* Mantém a opacidade no CSS */
 }
 
 @keyframes wave-flow {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+0% {
+transform: translateX(0);
+}
+100% {
+transform: translateX(-50%);
+}
 }
 
 /* === SOBRE === */
