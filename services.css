@@ -57,30 +57,28 @@ body {
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 35px;
 }
 .nav-link {
   position: relative;
   color: var(--cor-azul-escuro);
   text-decoration: none;
-  font-weight: 700;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: color .3s ease;
 }
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
   left: 0;
+  bottom: -4px;
   width: 0;
   height: 2px;
   background: var(--cor-verde-destaque);
-  transition: width 0.3s;
+  transition: width .3s ease;
 }
-.nav-link:hover {
-  color: var(--cor-azul-medio);
-}
-.nav-link:hover::after {
-  width: 100%;
-}
+.nav-link:hover { color: var(--cor-azul-medio); }
+.nav-link:hover::after { width:100%; }
 
 /* === HAMBURGUER === */
 .hamburger {
@@ -236,28 +234,34 @@ body {
 }
 
 /* === RESPONSIVO === */
-@media(max-width: 768px){
-  .hamburger {
-    display: flex;
+@media(max-width:768px){
+  .hamburger{display:flex;}
+  .nav-menu{
+    position:fixed;
+    top:80px;
+    left:-100%;
+    width:100%;
+    height:calc(100vh - 80px);
+    background-color:var(--cor-fundo-claro);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:left .3s ease-in-out;
+    z-index:1001;
   }
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background-color: var(--cor-fundo-claro);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: left 0.3s ease-in-out;
-    z-index: 1001;
+  .nav-menu.active{left:0;}
+  .nav-list{flex-direction:column; gap:40px; text-align: center;}
+  .nav-link{font-size:1.5rem;}
+
+    /* Transformação das barras em "X" */
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
   }
-  .nav-menu.active { left: 0; }
-  .nav-list { flex-direction: column; gap: 40px; text-align: center; }
-  .nav-link { font-size: 1.5rem; }
-  .hamburger.active .bar:nth-child(2){opacity:0;}
-  .hamburger.active .bar:nth-child(1){transform:translateY(6px) rotate(45deg);}
-  .hamburger.active .bar:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
 }

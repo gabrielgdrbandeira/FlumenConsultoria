@@ -16,7 +16,7 @@
   <!-- HEADER -->
   <header class="header">
     <div class="container">
-      <a href="index.html" class="logo">
+      <a href="index.html#inicio" class="logo">
         <img src="imagens/13.png" alt="Flumen Consultoria Logo">
       </a>
       <nav class="nav-menu">
@@ -25,7 +25,7 @@
           <li><a href="sobre.html" class="nav-link">Sobre</a></li>
           <li><a href="services.html" class="nav-link">Serviços</a></li>
           <li><a href="atuacoes.html" class="nav-link">Atuações</a></li>
-          <li><a href="contato.html" class="nav-link">Contato</a></li>
+          <li><a href="index.html#contato" class="nav-link">Contato</a></li>
         </ul>
       </nav>
       <button class="hamburger">
@@ -269,12 +269,45 @@
   <script>
     // Script para o tooltip do mapa SVG - apenas estados de atuação
     const description = document.querySelector(".tooltip");
+    const svg = document.querySelector(".brasil-svg");
+    const mapWrapper = document.querySelector(".map-wrapper");
+
+    // Função para atualizar a posição do tooltip
+    function updateTooltipPosition(path) {
+      if (!path || !description.classList.contains("active")) return;
+      
+      // Obtém o bounding box do path no sistema de coordenadas do SVG
+      const bbox = path.getBBox();
+      
+      // Obtém a posição e dimensões do SVG e do wrapper
+      const svgRect = svg.getBoundingClientRect();
+      const wrapperRect = mapWrapper.getBoundingClientRect();
+      const viewBox = svg.viewBox.baseVal;
+      
+      // Calcula a escala de transformação
+      const scaleX = svgRect.width / viewBox.width;
+      const scaleY = svgRect.height / viewBox.height;
+      
+      // Calcula o centro do estado no sistema de coordenadas do SVG
+      const centerXSVG = bbox.x + bbox.width / 2;
+      const centerYSVG = bbox.y + bbox.height / 2;
+      
+      // Converte para coordenadas relativas ao wrapper (position: absolute)
+      const centerX = (centerXSVG - viewBox.x) * scaleX + (svgRect.left - wrapperRect.left);
+      const centerY = (centerYSVG - viewBox.y) * scaleY + (svgRect.top - wrapperRect.top);
+      
+      // Posiciona o tooltip sobre o centro do estado
+      description.style.left = centerX + "px";
+      description.style.top = (centerY - 60) + "px";
+    }
 
     // Apenas estados de atuação são interativos
     document.querySelectorAll('.brasil-svg path.estado-atuacao').forEach((el) => {
       el.addEventListener('mouseover', (event) => {
+        const path = event.target;
         description.classList.add("active");
-        description.innerHTML = event.target.getAttribute('title') || event.target.id;
+        description.innerHTML = path.getAttribute('title') || path.id;
+        updateTooltipPosition(path);
       });
 
       el.addEventListener("mouseout", (event) => {
@@ -282,10 +315,20 @@
       });
     });
 
-    document.onmousemove = function (e) {
-      description.style.left = e.pageX + "px";
-      description.style.top = (e.pageY - 70) + "px";
+    // Atualiza a posição quando o usuário faz scroll ou redimensiona
+    let updateTimeout;
+    function scheduleUpdate() {
+      clearTimeout(updateTimeout);
+      updateTimeout = setTimeout(() => {
+        const activePath = document.querySelector('.brasil-svg path.estado-atuacao:hover');
+        if (activePath) {
+          updateTooltipPosition(activePath);
+        }
+      }, 10);
     }
+
+    window.addEventListener('scroll', scheduleUpdate, true);
+    window.addEventListener('resize', scheduleUpdate);
   </script>
 </body>
 </html>
