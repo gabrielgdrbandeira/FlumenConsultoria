@@ -56,20 +56,20 @@ body {
 }
 .logo img:hover { transform: scale(1.05); }
 
-/* === NAV MENU === */
+/* === NAVEGAÇÃO === */
 .nav-list {
-  list-style: none;
   display: flex;
-  gap: 25px;
+  list-style: none;
+  gap: 35px;
 }
-
 .nav-link {
-  text-decoration: none;
-  font-weight: 700;
-  color: var(--cor-azul-escuro);
   position: relative;
+  color: var(--cor-azul-escuro);
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: color .3s ease;
 }
-
 .nav-link::after {
   content: '';
   position: absolute;
@@ -78,14 +78,10 @@ body {
   width: 0;
   height: 2px;
   background: var(--cor-verde-destaque);
-  transition: width 0.3s;
+  transition: width .3s ease;
 }
-
-.nav-link:hover,
-.nav-link:hover::after {
-  width: 100%;
-  color: var(--cor-azul-medio);
-}
+.nav-link:hover { color: var(--cor-azul-medio); }
+.nav-link:hover::after { width:100%; }
 
 /* === HAMBURGER MOBILE === */
 .hamburger {
@@ -220,7 +216,7 @@ body {
   text-align: center;
   background: var(--cor-branco);
   padding: 12px 18px;
-  z-index: 1000;
+  z-index: 9999;
   color: var(--cor-azul-escuro);
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -388,46 +384,32 @@ body {
 
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
-  .hamburger {
-    display: flex;
+  .hamburger{display:flex;}
+  .nav-menu{
+    position:fixed;
+    top:80px;
+    left:-100%;
+    width:100%;
+    height:calc(100vh - 80px);
+    background-color:var(--cor-fundo-claro);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    transition:left .3s ease-in-out;
+    z-index:1001;
   }
+  .nav-menu.active{left:0;}
+  .nav-list{flex-direction:column; gap:40px; text-align: center;}
+  .nav-link{font-size:1.5rem;}
 
-  .nav-menu {
-    position: fixed;
-    top: 80px;
-    left: -100%;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: var(--cor-fundo-claro);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: left 0.3s;
-    z-index: 1000;
-  }
-
-  .nav-menu.active {
-    left: 0;
-  }
-
-  .nav-list {
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  .nav-link {
-    font-size: 1.5rem;
-  }
-
+    /* Transformação das barras em "X" */
   .hamburger.active .bar:nth-child(2) {
     opacity: 0;
   }
-
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(6px) rotate(45deg);
   }
-
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-6px) rotate(-45deg);
   }
