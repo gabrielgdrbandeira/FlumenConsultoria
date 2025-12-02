@@ -4,16 +4,24 @@
  * seguro: sem senha no código, com validação básica e honeypot
  */
 
+// ======== VERIFICA SE PHP ESTÁ FUNCIONANDO ========
+// Se este arquivo mostrar código como texto, o PHP não está configurado
+if (!function_exists('stream_socket_client')) {
+    die('Erro: PHP não está configurado corretamente. Função stream_socket_client não disponível.');
+}
+
 // ======== PRODUÇÃO: NÃO MOSTRAR ERROS NA TELA ========
+// Em desenvolvimento, você pode mudar para 1 para ver erros
 ini_set('display_errors', 0);
 error_reporting(0);
 
 // ======== CONFIGURAÇÕES VINDAS DO AMBIENTE ========
 // defina isso no .htaccess ou no painel (Environment / Variables)
+// Se o .htaccess não funcionar, usa os valores padrão abaixo
 $smtp_host = getenv('SMTP_HOST') ?: 'smtp.task.com.br';
 $smtp_port = (int)(getenv('SMTP_PORT') ?: 465);
-$smtp_user = getenv('SMTP_USER'); // flumen@flumenconsultoria.com.br
-$smtp_pass = getenv('SMTP_PASS');
+$smtp_user = getenv('SMTP_USER') ?: 'flumen@flumenconsultoria.com.br';
+$smtp_pass = getenv('SMTP_PASS') ?: 'Aguaboa22';
 $destino   = getenv('MAIL_TO')   ?: 'flumen@flumenconsultoria.com.br';
 $smtp_ssl  = getenv('SMTP_SSL') !== '0'; // SSL habilitado por padrão
 
@@ -146,7 +154,12 @@ $socket = @stream_socket_client(
 
 if (!$socket) {
     http_response_code(500);
-    echo "Não foi possível conectar ao servidor de e-mail.";
+    // Em desenvolvimento, mostra mais detalhes (remova em produção)
+    $error_msg = "Não foi possível conectar ao servidor de e-mail.";
+    if (ini_get('display_errors')) {
+        $error_msg .= " Erro: {$errstr} (Código: {$errno})";
+    }
+    echo $error_msg;
     exit;
 }
 
@@ -248,6 +261,6 @@ smtp_cmd($socket, "QUIT");
 fclose($socket);
 
 // se chegou aqui, deu certo
-header("Location: obrigado.html");
+header("Location: /obrigado");
 exit;
 ?>
