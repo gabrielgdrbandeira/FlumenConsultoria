@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagem Enviada - Flumen Consultoria</title>
+    
+    <link rel="stylesheet" href="obrigado.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body>
+    <div class="obrigado-container">
+        <div class="obrigado-content">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            
+            <h1>Mensagem Enviada com Sucesso!</h1>
+            
+            <p class="message">
+                Obrigado por entrar em contato conosco. Recebemos sua mensagem e retornaremos em breve.
+            </p>
+            
+            <div class="redirect-info">
+                <p>Você será redirecionado para a página inicial em <span id="countdown">10</span> segundos.</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+            </div>
+            
+            <a href="/" class="btn-primary">Voltar Agora</a>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 10;
+        const countdownElement = document.getElementById('countdown');
+        const progressBar = document.getElementById('progressBar');
+        
+        const interval = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            progressBar.style.width = ((10 - timeLeft) / 10 * 100) + '%';
+            
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                window.location.href = '/';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
+

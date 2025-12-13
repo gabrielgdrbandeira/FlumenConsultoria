@@ -126,10 +126,14 @@
             <div class="container">
                 <h2 class="section-title">Entre em Contato</h2>
                 <p class="section-subtitle">Estamos prontos para atender você. Envie uma mensagem!</p>
-                <form class="contact-form">
-                    <input type="text" placeholder="Seu Nome" required>
-                    <input type="email" placeholder="Seu E-mail" required>
-                    <textarea rows="5" placeholder="Sua Mensagem" required></textarea>
+                <form class="contact-form" action="enviar-email.php" method="POST">
+                    <input type="text" name="nome" placeholder="Seu Nome" required>
+                    <input type="email" name="email" placeholder="Seu E-mail" required>
+                    <input type="text" name="telefone" placeholder="Seu Telefone (opcional)">
+                    <input type="text" name="assunto" placeholder="Assunto (opcional)" value="Contato via site">
+                    <textarea name="mensagem" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    <!-- Honeypot (anti-bot) - deve ficar oculto -->
+                    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
                     <button type="submit" class="btn">Enviar Mensagem</button>
                 </form>
             </div>
