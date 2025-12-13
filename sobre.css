@@ -241,6 +241,7 @@ body {
   color: var(--cor-texto-escuro);
   padding: 0 1.5rem 1.5rem;
   line-height: 1.6;
+  text-align: justify;
 }
 
 /* === FOOTER === */
