@@ -36,7 +36,6 @@ body {
 }
 
 /* === HEADER === */
-/* === HEADER === */
 .header {
   background-color: var(--cor-fundo-claro);
   box-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -50,8 +49,9 @@ body {
   align-items: center;
 }
 .logo img {
-  height: 185px;
+  height: 300px;
   padding-top: 25px;
+  margin-left: -110px;
   transition: transform 0.3s ease-in-out;
 }
 .logo img:hover { transform: scale(1.05); }
@@ -83,17 +83,17 @@ body {
 .nav-link:hover { color: var(--cor-azul-medio); }
 .nav-link:hover::after { width:100%; }
 
-/* === HAMBURGER MOBILE === */
+/* === HAMBURGER === */
 .hamburger {
   display: none;
   position: absolute;
-  top: 22px;
-  right: 22px;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
   flex-direction: column;
   cursor: pointer;
   background: none;
   border: none;
-  z-index: 1001;
 }
 
 .hamburger .bar {
@@ -101,7 +101,7 @@ body {
   height: 3px;
   margin: 6px 0;
   background-color: var(--cor-azul-escuro);
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 /* === TÍTULOS GLOBAIS === */
@@ -385,6 +385,11 @@ body {
 /* === RESPONSIVO === */
 @media (max-width: 768px) {
   .hamburger{display:flex;}
+  
+  .logo img {
+    margin-left: 0;
+  }
+  
   .nav-menu{
     position:fixed;
     top:80px;

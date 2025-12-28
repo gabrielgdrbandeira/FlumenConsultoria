@@ -48,8 +48,9 @@ body {
   align-items: center;
 }
 .logo img {
-  height: 185px;
+  height: 300px;
   padding-top: 25px;
+  margin-left: -110px;
   transition: transform 0.3s ease-in-out;
 }
 .logo img:hover { transform: scale(1.05); }
@@ -76,12 +77,12 @@ body {
   width: 0;
   height: 2px;
   background: var(--cor-verde-destaque);
-  transition: width 0.3s ease;
+  transition: width .3s ease;
 }
 .nav-link:hover { color: var(--cor-azul-medio); }
 .nav-link:hover::after { width:100%; }
 
-/* === HAMBURGUER === */
+/* === HAMBURGER === */
 .hamburger {
   display: none;
   position: absolute;
@@ -303,6 +304,11 @@ body {
 /* === RESPONSIVO === */
 @media(max-width:768px){
   .hamburger{display:flex;}
+  
+  .logo img {
+    margin-left: 0;
+  }
+  
   .nav-menu{
     position:fixed;
     top:80px;

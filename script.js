@@ -20,9 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (servicosSwiper) {
     new Swiper(".servicesSwiper", {
       loop: true,
-      slidesPerView: 1,
+      slidesPerView: 3,
+      slidesPerGroup: 1,              // Troca apenas um card por vez
       spaceBetween: 30,
-      autoHeight: true,              // ⭐ faz o swiper acompanhar a altura de cada slide
+      autoplay: {
+        delay: 3000,                  // Muda automaticamente a cada 3 segundos
+        disableOnInteraction: false,  // Continua mesmo após interação do usuário
+        pauseOnMouseEnter: true,      // Pausa quando o mouse está sobre o carrossel
+      },
+      autoHeight: true,
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -30,6 +36,23 @@ document.addEventListener('DOMContentLoaded', () => {
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
+      },
+      breakpoints: {
+        // Quando a largura é >= 320px (mobile)
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        // Quando a largura é >= 768px (tablet)
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 25,
+        },
+        // Quando a largura é >= 1024px (desktop)
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
       }
     });
   }

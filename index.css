@@ -48,6 +48,7 @@ body {
 .logo img {
   height: 300px;
   padding-top: 25px;
+  margin-left: -110px;
   transition: transform 0.3s ease-in-out;
 }
 .logo img:hover { transform: scale(1.05); }
@@ -459,6 +460,10 @@ transform: translateX(-50%);
 /* === RESPONSIVO === */
 @media(max-width:768px){
   .hamburger{display:flex;}
+  
+  .logo img {
+    margin-left: 0;
+  }
   
   .hero h1 {
     font-family:var(--fonte-titulo);
