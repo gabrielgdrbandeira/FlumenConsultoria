@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu   = document.querySelector('.nav-menu');
 
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
+    const isActive = hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', isActive);
   });
 
   document.querySelectorAll('.nav-link').forEach(link => {

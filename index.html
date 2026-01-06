@@ -3,7 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Flumen Consultoria</title>
+        <title>Flumen Consultoria em Águas Continentais | Consultoria Ambiental</title>
+        <meta name="description" content="Flumen Consultoria em Águas Continentais - 15 anos de excelência em estudos ambientais, pesquisas em ambientes aquáticos e restauração fluvial. Especialistas em licenciamento ambiental e monitoramento.">
+        <meta name="keywords" content="consultoria ambiental, águas continentais, estudos ambientais, restauração fluvial, licenciamento ambiental, monitoramento ambiental, biodiversidade aquática">
+        <meta name="author" content="Flumen Consultoria">
         
         <link rel="stylesheet" href="index.css">
 
@@ -19,7 +22,7 @@
                     <img src="imagens/15.png" alt="Flumen Consultoria Logo">
                 </a>
 
-                <nav class="nav-menu">
+                <nav class="nav-menu" role="navigation" aria-label="Menu principal">
                     <ul class="nav-list">
                         <li><a href="index.html" class="nav-link">Início</a></li>
                         <li><a href="sobre.html" class="nav-link">Sobre</a></li>
@@ -29,7 +32,7 @@
                     </ul>
                 </nav>
 
-                <button class="hamburger">
+                <button class="hamburger" aria-label="Menu de navegação" aria-expanded="false">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
@@ -59,7 +62,7 @@
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M0,50 Q300,100 600,50 T1200,50 L1200,0 L0,0 Z" fill="rgba(14, 70, 107, 1)"/>
             </svg>
-        </div>--
+        </div>
         <div class="wave-layer wave-layer-2">
             <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M0,30 Q300,110 600,30 T1200,30 L1200,0 L0,0 Z" fill="rgba(2, 153, 202, 1)"/>
@@ -89,13 +92,12 @@
                 </div>
                 <div class="about-images-container">
                     <div class="about-image-antiga">
-                        <img src="imagens/LogoAntigaFlumen.jpeg" alt="Logo Antiga da Flumen">
-                    </div>
+                        <img src="imagens/LogoAntigaFlumen.jpeg" alt="Logo Antiga da Flumen" loading="lazy">
+                </div>
                     <div class="about-image">
-                        <img src="imagens/13.png" alt="Equipe ou projeto da Flumen">
+                        <img src="imagens/13.png" alt="Equipe ou projeto da Flumen" loading="lazy">
                     </div>
                 </div>
-            </div>
             </div>
         </section>
 
@@ -127,13 +129,23 @@
                 <h2 class="section-title">Entre em Contato</h2>
                 <p class="section-subtitle">Estamos prontos para atender você. Envie uma mensagem!</p>
                 <form class="contact-form" action="enviar-email.php" method="POST">
-                    <input type="text" name="nome" placeholder="Seu Nome" required>
-                    <input type="email" name="email" placeholder="Seu E-mail" required>
-                    <input type="text" name="telefone" placeholder="Seu Telefone (opcional)">
-                    <input type="text" name="assunto" placeholder="Assunto (opcional)" value="Contato via site">
-                    <textarea name="mensagem" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    <label for="nome" class="sr-only">Nome</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu Nome" required aria-required="true">
+                    
+                    <label for="email" class="sr-only">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Seu E-mail" required aria-required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                    
+                    <label for="telefone" class="sr-only">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="Seu Telefone (opcional)">
+                    
+                    <label for="assunto" class="sr-only">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" placeholder="Assunto (opcional)" value="Contato via site">
+                    
+                    <label for="mensagem" class="sr-only">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" rows="5" placeholder="Sua Mensagem" required aria-required="true"></textarea>
+                    
                     <!-- Honeypot (anti-bot) - deve ficar oculto -->
-                    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+                    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off" aria-hidden="true">
                     <button type="submit" class="btn">Enviar Mensagem</button>
                 </form>
             </div>
@@ -143,7 +155,7 @@
  <footer class="footer">
             <div class="container">
                 <div class="footer-col">
-                    <img src="imagens/17.png" alt="Flumen Consultoria Logo" class="footer-logo">
+                    <img src="imagens/17.png" alt="Flumen Consultoria Logo" class="footer-logo" loading="lazy">
                 </div>
                 <div class="footer-col">
                     <h4>Contato</h4>

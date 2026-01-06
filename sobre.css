@@ -179,9 +179,22 @@ body {
 }
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  grid-template-columns: repeat(6, 2fr);
   gap: 2.5rem;
   justify-items: center;
+}
+
+/* Gerentes na primeira linha (2 cards, cada um ocupa 3 colunas) */
+.team-member-card:nth-child(1),
+.team-member-card:nth-child(2) {
+  grid-column: span 3;
+}
+
+/* Analistas na segunda linha (3 cards, cada um ocupa 2 colunas) */
+.team-member-card:nth-child(3),
+.team-member-card:nth-child(4),
+.team-member-card:nth-child(5) {
+  grid-column: span 2;
 }
 .team-member-card {
   position: relative;
@@ -347,6 +360,14 @@ body {
     max-width:none;
   }
   .team-grid {
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns: 1fr;
+  }
+  
+  .team-member-card:nth-child(1),
+  .team-member-card:nth-child(2),
+  .team-member-card:nth-child(3),
+  .team-member-card:nth-child(4),
+  .team-member-card:nth-child(5) {
+    grid-column: span 1;
   }
 }
