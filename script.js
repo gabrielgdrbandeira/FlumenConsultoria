@@ -19,11 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
   /** CARROSSEL SWIPER (apenas se existir no HTML) **/
   const servicosSwiper = document.querySelector('.servicesSwiper');
   if (servicosSwiper) {
+    const totalSlides = servicosSwiper.querySelectorAll('.swiper-slide').length;
+    // Loop precisa de pelo menos o dobro de slides do slidesPerView para funcionar corretamente
+    const enableLoop = totalSlides >= 5;
+    
     new Swiper(".servicesSwiper", {
       loop: true,
       slidesPerView: 3,
       slidesPerGroup: 1,              // Troca apenas um card por vez
       spaceBetween: 30,
+      watchSlidesProgress: true,
       autoplay: {
         delay: 3000,                  // Muda automaticamente a cada 3 segundos
         disableOnInteraction: false,  // Continua mesmo após interação do usuário
