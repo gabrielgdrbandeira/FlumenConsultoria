@@ -13,7 +13,9 @@ if (!function_exists('stream_socket_client')) {
 // ======== PRODUÇÃO: NÃO MOSTRAR ERROS NA TELA ========
 // Em desenvolvimento, você pode mudar para 1 para ver erros
 ini_set('display_errors', 0);
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('log_errors', 1);
+ini_set('error_log', __DIR__ . '/php-errors.log');
 
 // ======== CONFIGURAÇÕES VINDAS DO AMBIENTE ========
 // defina isso no .htaccess ou no painel (Environment / Variables)
@@ -48,11 +50,8 @@ if (!empty($_POST['website'] ?? '')) {
 
 // ======== VALIDAÇÃO DOS CAMPOS ========
 function sanitize($v) {
-    if (function_exists('filter_var') && defined('FILTER_SANITIZE_STRING')) {
-        return trim(filter_var($v, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES));
-    }
-    // fallback para PHP 8.1+
-    return trim(htmlspecialchars(strip_tags($v), ENT_QUOTES, 'UTF-8'));
+    // Compatível com PHP 8.1+ (FILTER_SANITIZE_STRING foi removido)
+    return trim(htmlspecialchars(strip_tags($v ?? ''), ENT_QUOTES, 'UTF-8'));
 }
 
 $nome        = sanitize($_POST['nome']     ?? '');
@@ -92,7 +91,8 @@ $bodyHtml = "
 $boundary = "==B_" . md5(uniqid((string)mt_rand(), true));
 
 $headersData = [];
-$headersData[] = "From: Site Flumen <nao-responda@flumenconsultoria.com.br>";
+// Usa o e-mail autenticado como remetente (servidor SMTP exige)
+$headersData[] = "From: Site Flumen <{$smtp_user}>";
 $headersData[] = "Reply-To: {$email}";
 $headersData[] = "MIME-Version: 1.0";
 $headersData[] = "Content-Type: multipart/alternative; boundary=\"{$boundary}\"";
@@ -107,11 +107,32 @@ $data .= $bodyHtml . "\r\n\r\n";
 $data .= "--{$boundary}--\r\n";
 
 // ======== FUNÇÕES SMTP ========
-function smtp_read($socket) {
+function smtp_read($socket, $timeout = 10) {
+    // Define timeout para leitura
+    stream_set_timeout($socket, $timeout);
+    
     $data = '';
-    while ($str = fgets($socket, 515)) {
+    $start_time = time();
+    
+    while (true) {
+        $str = @fgets($socket, 515);
+        if ($str === false) {
+            // Verifica se foi timeout
+            $meta = stream_get_meta_data($socket);
+            if ($meta['timed_out']) {
+                break;
+            }
+            // Se não foi timeout, pode ser fim de stream
+            break;
+        }
+        
         $data .= $str;
         if (preg_match('/^\d{3}\s/', $str)) {
+            break;
+        }
+        
+        // Timeout de segurança
+        if (time() - $start_time > $timeout) {
             break;
         }
     }
@@ -142,32 +163,50 @@ if ($use_ssl) {
     ]);
 }
 
+// configura timeout para conexão (reduzido para evitar timeout muito longo)
+$timeout = 15; // 15 segundos para conectar
+
 // abre socket (com ssl:// a conexão já é criptografada desde o início)
 $socket = @stream_socket_client(
     $remote,
     $errno,
     $errstr,
-    10,
+    $timeout,
     STREAM_CLIENT_CONNECT,
     $context
 );
 
 if (!$socket) {
     http_response_code(500);
-    // Em desenvolvimento, mostra mais detalhes (remova em produção)
     $error_msg = "Não foi possível conectar ao servidor de e-mail.";
-    if (ini_get('display_errors')) {
-        $error_msg .= " Erro: {$errstr} (Código: {$errno})";
+    $error_msg .= "<br><strong>Detalhes:</strong><br>";
+    $error_msg .= "Servidor: {$smtp_host}:{$smtp_port}<br>";
+    $error_msg .= "SSL: " . ($use_ssl ? 'Sim' : 'Não') . "<br>";
+    
+    // Mensagens de erro mais específicas
+    if ($errno == 0 && empty($errstr)) {
+        $error_msg .= "Erro: Timeout na conexão (servidor não respondeu em {$timeout} segundos)<br>";
+        $error_msg .= "<br><small>Possíveis causas:<br>";
+        $error_msg .= "- Servidor SMTP pode estar offline<br>";
+        $error_msg .= "- Porta {$smtp_port} pode estar bloqueada pelo firewall<br>";
+        $error_msg .= "- Hostname do servidor pode estar incorreto</small>";
+    } else {
+        $error_msg .= "Erro: {$errstr} (Código: {$errno})<br>";
+        $error_msg .= "<br><small>Verifique se a porta 465 não está bloqueada e se o servidor SMTP está correto.</small>";
     }
+    
     echo $error_msg;
     exit;
 }
+
+// Configura timeout para todas as operações no socket
+stream_set_timeout($socket, 15);
 
 // lê banner
 $resp = smtp_read($socket);
 
 // EHLO
-$hostname = gethostname() ?: 'localhost';
+$hostname = function_exists('gethostname') ? gethostname() : (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'localhost');
 $resp = smtp_cmd($socket, "EHLO {$hostname}");
 
 // verifica se aceita STARTTLS (para porta 587)
@@ -209,16 +248,22 @@ $resp = smtp_cmd($socket, base64_encode($smtp_pass));
 if (stripos($resp, '235') !== 0) {
     fclose($socket);
     http_response_code(500);
-    echo "Senha de e-mail rejeitada.";
+    $error_msg = "Senha de e-mail rejeitada.";
+    $error_msg .= "<br><strong>Resposta do servidor:</strong> " . htmlspecialchars($resp);
+    $error_msg .= "<br><small>Verifique se o usuário e senha estão corretos.</small>";
+    echo $error_msg;
     exit;
 }
 
-// MAIL FROM (use e-mail do domínio)
-$resp = smtp_cmd($socket, "MAIL FROM:<nao-responda@flumenconsultoria.com.br>");
+// MAIL FROM (deve usar o e-mail autenticado, senão o servidor rejeita)
+$resp = smtp_cmd($socket, "MAIL FROM:<{$smtp_user}>");
 if (stripos($resp, '250') !== 0) {
     fclose($socket);
     http_response_code(500);
-    echo "Remetente rejeitado.";
+    $error_msg = "Remetente rejeitado.";
+    $error_msg .= "<br><strong>Resposta do servidor:</strong> " . htmlspecialchars($resp);
+    $error_msg .= "<br><small>O servidor SMTP não aceitou o remetente. Verifique se o e-mail está correto.</small>";
+    echo $error_msg;
     exit;
 }
 
@@ -252,7 +297,10 @@ $resp = smtp_read($socket);
 if (stripos($resp, '250') !== 0) {
     fclose($socket);
     http_response_code(500);
-    echo "Falha ao enviar e-mail.";
+    $error_msg = "Falha ao enviar e-mail.";
+    $error_msg .= "<br><strong>Resposta do servidor:</strong> " . htmlspecialchars($resp);
+    $error_msg .= "<br><small>O servidor SMTP rejeitou a mensagem. Verifique as configurações.</small>";
+    echo $error_msg;
     exit;
 }
 
@@ -261,6 +309,22 @@ smtp_cmd($socket, "QUIT");
 fclose($socket);
 
 // se chegou aqui, deu certo
-header("Location: /obrigado");
+// Verifica se existe obrigado.html na mesma pasta ou na raiz
+$obrigado_path = __DIR__ . '/obrigado.html';
+if (!file_exists($obrigado_path)) {
+    $obrigado_path = __DIR__ . '/obrigado/index.html';
+}
+
+if (file_exists($obrigado_path)) {
+    header("Location: obrigado.html");
+} else {
+    // Fallback: mostra mensagem de sucesso
+    header("Content-Type: text/html; charset=UTF-8");
+    echo "<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Mensagem Enviada</title></head><body>";
+    echo "<h1>Mensagem enviada com sucesso!</h1>";
+    echo "<p>Obrigado pelo contato. Retornaremos em breve.</p>";
+    echo "<a href='index.html'>Voltar ao site</a>";
+    echo "</body></html>";
+}
 exit;
 ?>
