@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.flumenconsultoria.com.br/sitemap.xml
+
+# Bloquear arquivos sensíveis
+Disallow: /enviar-email.php
+Disallow: /*.php$
+Allow: /index.php
+
+# Permitir CSS e JS
+Allow: /*.css$
+Allow: /*.js$
+
+# Permitir imagens
+Allow: /imagens/
+
