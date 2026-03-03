@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias - Flumen Consultoria</title>
+    
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="noticias.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+    <!-- Estilos do Modal (Você pode mover isso para o seu noticias.css depois se preferir) -->
+    <style>
+        /* Fundo escuro e desfocado */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(16, 53, 88, 0.7); /* Azul escuro com transparência */
+            backdrop-filter: blur(8px); /* EFEITO DE DESFOQUE */
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        /* Classe para ativar o modal */
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* A caixa branca da notícia */
+        .modal-box {
+            background-color: var(--cor-branco);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh; /* Não deixa ficar maior que a tela */
+            overflow-y: auto; /* Adiciona barra de rolagem se o texto for grande */
+            border-radius: 12px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+
+        /* Botão de Fechar (X) */
+        .fechar-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--cor-texto-escuro);
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.3s ease;
+        }
+
+        .fechar-modal:hover {
+            color: var(--cor-verde-destaque);
+        }
+
+        /* Imagem de topo do Modal */
+        .modal-img-container {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Conteúdo interno do Modal */
+        .modal-conteudo {
+            padding: 40px;
+        }
+
+        .modal-data {
+            color: #888;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .modal-titulo {
+            font-family: var(--fonte-titulo);
+            color: var(--cor-azul-escuro);
+            font-size: 2.2rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .modal-texto {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .modal-texto p {
+            margin-bottom: 20px;
+        }
+
+        .modal-texto h3 {
+            font-family: var(--fonte-titulo);
+            color: var(--cor-azul-medio);
+            margin: 30px 0 15px;
+        }
+
+        /* Esconde a barra de rolagem do body quando o modal abre */
+        body.modal-aberto {
+            overflow: hidden;
+        }
+
+        @media(max-width: 768px) {
+            .modal-conteudo { padding: 25px; }
+            .modal-titulo { font-size: 1.8rem; }
+            .modal-img-container { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === HEADER PADRÃO === -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html#inicio" class="logo">
+                <img src="imagens/15.png" alt="Flumen Consultoria Logo" style="height: 300px; padding-top: 25px; margin-left: -110px;">
+            </a>
+            <nav class="nav-menu" role="navigation" aria-label="Menu principal">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Início</a></li>
+                    <li><a href="sobre.html" class="nav-link">Sobre</a></li>
+                    <li><a href="services.html" class="nav-link">Serviços</a></li>
+                    <li><a href="atuacoes.html" class="nav-link">Atuações</a></li>
+                    <li><a href="noticias.html" class="nav-link">Notícias</a></li>
+                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- === CABEÇALHO DA PÁGINA === -->
+        <section class="page-header" style="background-color: var(--cor-azul-escuro); color: white; padding: 60px 0; text-align: center; margin-bottom: 40px;">
+            <div class="container">
+                <h1 style="font-family: var(--fonte-titulo); font-size: 2.5rem; margin-bottom: 10px;">Notícias e Artigos</h1>
+                <p>Acompanhe nossas atualizações e projetos recentes sobre o meio ambiente.</p>
+            </div>
+        </section>
+
+        <!-- === LISTA DE NOTÍCIAS === -->
+        <section class="news-feed">
+            <div class="container">
+                
+                <div class="news-page-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;">
+                    
+                    <!-- Notícia 1 -->
+                    <article class="news-card big-card" style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="news-img" style="height: 220px;">
+                            <img src="imagens/noticia1.jpg" alt="Mural mico-leão-preto" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="news-content" style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                            <span class="news-date" style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">28 Fev 2026</span>
+                            <h3 style="font-size: 1.1rem; color: var(--cor-azul-escuro); margin-bottom: 10px;">Mural sobre o mico-leão-preto homenageia a espécie</h3>
+                            <p class="news-excerpt" style="font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5;">
+                                Um projeto artístico que une conservação e comunidade local, destacando a importância da preservação do primata...
+                            </p>
+                            <!-- Note o onclick chamando o ID 1 -->
+                            <a href="#" onclick="abrirModal(1); return false;" class="read-more" style="color: var(--cor-verde-destaque); font-weight: bold; text-decoration: none; margin-top: auto;">Ler matéria completa &rarr;</a>
+                        </div>
+                    </article>
+
+                    <!-- Notícia 2 -->
+                    <article class="news-card big-card" style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;">
+                        <div class="news-img" style="height: 220px;">
+                            <img src="imagens/noticia2.jpg" alt="Edital de contratação" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="news-content" style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
+                            <span class="news-date" style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">20 Fev 2026</span>
+                            <h3 style="font-size: 1.1rem; color: var(--cor-azul-escuro); margin-bottom: 10px;">Aberto edital de contratação para vagas de estágio</h3>
+                            <p class="news-excerpt" style="font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5;">
+                                O Programa de Conservação anuncia novas oportunidades para estudantes de biologia e engenharia ambiental...
+                            </p>
+                            <!-- Note o onclick chamando o ID 2 -->
+                            <a href="#" onclick="abrirModal(2); return false;" class="read-more" style="color: var(--cor-verde-destaque); font-weight: bold; text-decoration: none; margin-top: auto;">Ler matéria completa &rarr;</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- === A ESTRUTURA DO MODAL (Escondida por padrão) === -->
+    <div id="modalNoticia" class="modal-overlay">
+        <div class="modal-box">
+            <button class="fechar-modal" onclick="fecharModal()">&times;</button>
+            
+            <div class="modal-img-container">
+                <img id="imgModal" src="" alt="Imagem da Notícia">
+            </div>
+            
+            <div class="modal-conteudo">
+                <span id="dataModal" class="modal-data"></span>
+                <h2 id="tituloModal" class="modal-titulo"></h2>
+                <div id="textoModal" class="modal-texto">
+                    <!-- O texto longo será injetado aqui pelo JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === FOOTER PADRÃO === -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-col">
+                <img src="imagens/17.png" alt="Flumen Consultoria Logo" class="footer-logo" loading="lazy">
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> Belo Horizonte/MG. <br>
+                    <i class="fas fa-phone"></i> (31) 99934-3254<br>
+                    <i class="fas fa-envelope"></i> flumen@flumenconsultoria.com.br
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Siga-nos</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/flumen_consultoria?igsh=MXdpeDBvc3Y5bjRjdw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/flumen-consultoria/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://youtube.com/@flumenecologia2425?si=bXSWr-yYoJilXUlf" target="_blank"><i class="fab fa-youtube"></i></a> </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Flumen Consultoria. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- === JAVASCRIPT DO MODAL E BANCO DE DADOS === -->
+    <script>
+        // 1. BANCO DE DADOS DE NOTÍCIAS (Você só edita os textos longos aqui!)
+        const bancoDeNoticias = {
+            1: {
+                imagem: "imagens/noticia1.jpg",
+                data: "28 de fevereiro de 2026 • Leitura: 3 min",
+                titulo: "Mural sobre o mico-leão-preto homenageia a espécie e presenteia a comunidade",
+                texto: `
+                    <p>Nesta última semana, o município, que abriga mais de 65% da população do mico-leão-preto, recebeu um presente especial. Um grande mural artístico foi inaugurado no centro da cidade, com o objetivo de homenagear a espécie e sensibilizar a população sobre a importância da sua conservação.</p>
+                    <p>A iniciativa, apoiada por diversos parceiros locais e especialistas ambientais, busca transformar espaços urbanos em ferramentas de educação ambiental. "A arte tem o poder de comunicar onde, muitas vezes, relatórios técnicos não chegam", afirma a coordenação do projeto.</p>
+                    <h3>A importância do Mico-Leão-Preto</h3>
+                    <p>Endêmico da Mata Atlântica do interior paulista, a espécie já foi considerada extinta na natureza. Hoje, graças a intensos esforços de conservação e pesquisa, tem uma chance de sobrevivência.</p>
+                    <p>A Flumen Consultoria ressalta que a preservação de espécies bandeira está diretamente ligada à saúde dos ecossistemas como um todo, incluindo a integridade das águas continentais.</p>
+                `
+            },
+            2: {
+                imagem: "imagens/noticia2.jpg",
+                data: "20 de fevereiro de 2026 • Leitura: 2 min",
+                titulo: "Aberto edital de contratação para vagas de estágio no Programa de Conservação",
+                texto: `
+                    <p>A Flumen Consultoria, em parceria com institutos de pesquisa, anuncia a abertura de novas vagas de estágio para estudantes de Ciências Biológicas, Engenharia Ambiental e áreas correlatas.</p>
+                    <p>Os estagiários terão a oportunidade de atuar diretamente em campo, auxiliando na coleta de dados de qualidade de água, levantamento de fauna aquática e apoio em projetos de restauração fluvial.</p>
+                    <h3>Como participar</h3>
+                    <p>Os interessados devem enviar o currículo e histórico escolar atualizado para o nosso e-mail oficial até o dia 10 de março. O processo seletivo incluirá análise de currículo e entrevista técnica online.</p>
+                `
+            }
+        };
+
+        // 2. FUNÇÃO PARA ABRIR O MODAL
+        function abrirModal(idNoticia) {
+            const noticia = bancoDeNoticias[idNoticia];
+            
+            if(noticia) {
+                // Preenche o modal com as informações do banco de dados
+                document.getElementById('imgModal').src = noticia.imagem;
+                document.getElementById('dataModal').innerText = noticia.data;
+                document.getElementById('tituloModal').innerText = noticia.titulo;
+                document.getElementById('textoModal').innerHTML = noticia.texto; // innerHTML porque tem tags <p>
+
+                // Mostra o modal na tela
+                document.getElementById('modalNoticia').classList.add('active');
+                
+                // Trava o scroll da página de fundo
+                document.body.classList.add('modal-aberto');
+            }
+        }
+
+        // 3. FUNÇÃO PARA FECHAR O MODAL
+        function fecharModal() {
+            document.getElementById('modalNoticia').classList.remove('active');
+            document.body.classList.remove('modal-aberto');
+        }
+
+        // 4. FECHAR CLICANDO FORA DA CAIXA BRANCA
+        document.getElementById('modalNoticia').addEventListener('click', function(event) {
+            // Se o usuário clicou exatamente no fundo escuro (overlay), fecha o modal
+            if(event.target === this) {
+                fecharModal();
+            }
+        });
+    </script>
+</body>
+</html>

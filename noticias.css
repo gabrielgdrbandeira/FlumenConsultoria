@@ -1,0 +1,265 @@
+/* === ESTILOS ESPECÍFICOS DA PÁGINA DE NOTÍCIAS === */
+
+/* Cabeçalho da Página (Menor que o Hero) */
+.page-header {
+    background-color: var(--cor-azul-escuro); /* Ou uma imagem de fundo fixa */
+    color: var(--cor-branco);
+    padding: 60px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-family: var(--fonte-titulo);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Barra de Pesquisa */
+.search-bar-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+}
+
+.btn-search {
+    background-color: var(--cor-verde-destaque);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Grid da Página de Notícias (3 Colunas = Mais espaço para texto) */
+.news-page-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Ajustes no Card para a Página de Notícias */
+.big-card .news-img {
+    height: 220px; /* Imagem um pouco mais alta que na home */
+}
+
+.news-excerpt {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 10px 0 15px;
+    line-height: 1.5;
+}
+
+.read-more {
+    color: var(--cor-azul-medio);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+    color: var(--cor-verde-destaque);
+}
+
+/* Paginação */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--cor-azul-escuro);
+    transition: all 0.3s ease;
+}
+
+.page-link:hover, .page-link.active {
+    background-color: var(--cor-azul-medio);
+    color: white;
+    border-color: var(--cor-azul-medio);
+}
+/* === ESTILOS DA PÁGINA DA MATÉRIA (LEITURA) === */
+
+/* Container mais estreito para focar na leitura do texto */
+.container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.single-article {
+    padding: 50px 0 100px;
+}
+
+/* Cabeçalho do Artigo */
+.back-link {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--cor-azul-medio);
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 30px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--cor-verde-destaque);
+}
+
+.back-link i {
+    margin-right: 5px;
+}
+
+.article-date {
+    display: block;
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.article-title {
+    font-family: var(--fonte-titulo);
+    font-size: 2.8rem;
+    color: var(--cor-azul-escuro);
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.article-subtitle {
+    font-size: 1.25rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 40px;
+}
+
+/* Imagem de Destaque */
+.article-featured-image {
+    max-width: 1100px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+}
+
+.article-featured-image img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.image-caption {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Conteúdo de Texto (O artigo em si) */
+.article-content {
+    font-size: 1.15rem; /* Fonte um pouco maior para leitura */
+    line-height: 1.8;
+    color: #333;
+}
+
+.article-content p {
+    margin-bottom: 25px;
+}
+
+.article-content h2 {
+    font-family: var(--fonte-titulo);
+    font-size: 2rem;
+    color: var(--cor-azul-escuro);
+    margin: 40px 0 20px;
+}
+
+.article-content blockquote {
+    font-size: 1.4rem;
+    font-family: var(--fonte-titulo);
+    font-style: italic;
+    color: var(--cor-azul-medio);
+    border-left: 5px solid var(--cor-verde-destaque);
+    padding-left: 25px;
+    margin: 40px 0;
+    background-color: var(--cor-fundo-claro);
+    padding: 25px;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Área de Compartilhamento */
+.article-share {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    color: var(--cor-azul-escuro);
+}
+
+.share-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--cor-branco);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-3px);
+}
+
+.share-btn.whatsapp { background-color: #25D366; }
+.share-btn.linkedin { background-color: #0077b5; }
+.share-btn.facebook { background-color: #1877f2; }
+
+/* Responsividade do Artigo */
+@media (max-width: 768px) {
+    .article-title { font-size: 2rem; }
+    .article-subtitle { font-size: 1.1rem; }
+    .article-content { font-size: 1.05rem; }
+    .article-content blockquote { font-size: 1.2rem; }
+}
+
+/* Responsividade da Página de Notícias */
+@media (max-width: 900px) {
+    .news-page-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+}
+
+@media (max-width: 600px) {
+    .news-page-grid {
+        grid-template-columns: 1fr; /* 1 coluna no celular */
+    }
+    .search-bar-container {
+        justify-content: center;
+    }
+    .search-input {
+        width: 100%;
+    }
+}
