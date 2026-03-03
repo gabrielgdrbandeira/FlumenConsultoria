@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contato - Flumen Consultoria | Entre em Contato</title>
+        
+        <!-- SEO Meta Tags -->
+        <meta name="description" content="Entre em contato com a Flumen Consultoria. Avenida do Contorno, 2905, Sala 1106 - Bairro Santa Efigênia, Belo Horizonte/MG. Telefone: (31) 99934-3254. Email: flumen@flumenconsultoria.com.br">
+        <meta name="keywords" content="contato flumen, telefone flumen, email flumen, consultoria ambiental belo horizonte">
+        <meta name="robots" content="index, follow">
+        <link rel="canonical" href="https://www.flumenconsultoria.com.br/contato">
+        
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.flumenconsultoria.com.br/contato">
+        <meta property="og:title" content="Contato - Flumen Consultoria">
+        <meta property="og:description" content="Entre em contato com a Flumen Consultoria. Avenida do Contorno, 2905, Sala 1106 - Bairro Santa Efigênia, Belo Horizonte/MG.">
+        <meta property="og:image" content="https://www.flumenconsultoria.com.br/imagens/20.png">
+        
+        <link rel="icon" type="image/png" href="imagens/20.png">
+        <link rel="shortcut icon" type="image/png" href="imagens/20.png">
+        <link rel="apple-touch-icon" href="imagens/20.png">
+        
+        <link rel="stylesheet" href="index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aleo:wght@400;700&family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="/" class="logo">
+                <img src="imagens/13.png" alt="Flumen Consultoria Logo">
+            </a>
+
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="/" class="nav-link">Início</a></li>
+                    <li><a href="/sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="/services" class="nav-link">Serviços</a></li>
+                    <li><a href="/atuacoes" class="nav-link">Atuações</a></li>
+                    <li><a href="/contato" class="nav-link">Contato</a></li>
+                </ul>
+            </nav>
+
+            <button class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section id="contato" style="padding: 100px 0; min-height: 70vh;">
+            <div class="container">
+                <h2 class="section-title">Entre em Contato</h2>
+                <p class="section-subtitle">Estamos prontos para atender você. Envie uma mensagem!</p>
+                <form class="contact-form" action="/enviar-email.php" method="POST">
+                    <input type="text" name="nome" placeholder="Seu Nome" required>
+                    <input type="email" name="email" placeholder="Seu E-mail" required>
+                    <input type="text" name="telefone" placeholder="Seu Telefone (opcional)">
+                    <input type="text" name="assunto" placeholder="Assunto (opcional)" value="Contato via site">
+                    <textarea name="mensagem" rows="5" placeholder="Sua Mensagem" required></textarea>
+                    <!-- Honeypot (anti-bot) - deve ficar oculto -->
+                    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+                    <button type="submit" class="btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-col">
+                <img src="imagens/17.png" alt="Flumen Consultoria Logo" class="footer-logo">
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>
+                    <i class="fas fa-map-marker-alt"></i> Avenida do Contorno, 2905, Sala 1106 - Bairro Santa Efigênia, Belo Horizonte/MG. <br>
+                    <i class="fas fa-phone"></i> (31) 99934-3254<br>
+                    <i class="fas fa-envelope"></i> flumen@flumenconsultoria.com.br
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Siga-nos</h4>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/flumen_consultoria?igsh=MXdpeDBvc3Y5bjRjdw==" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/flumen-consultoria/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://youtube.com/@flumenecologia2425?si=bXSWr-yYoJilXUlf" target="_blank"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Flumen Consultoria. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

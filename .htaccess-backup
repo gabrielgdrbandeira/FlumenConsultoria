@@ -1,0 +1,35 @@
+# BACKUP DO .htaccess ORIGINAL
+# Se o novo .htaccess causar problemas, restaure este arquivo
+
+# ======== HABILITA REWRITE ENGINE ========
+RewriteEngine On
+
+# ======== GARANTE PROCESSAMENTO PHP ========
+AddHandler application/x-httpd-php .php
+AddType application/x-httpd-php .php
+
+# ======== VARIÁVEIS DE AMBIENTE PARA SMTP ========
+SetEnv SMTP_HOST "smtp.task.com.br"
+SetEnv SMTP_PORT "465"
+SetEnv SMTP_USER "flumen@flumenconsultoria.com.br"
+SetEnv SMTP_PASS "Aguaboa22"
+SetEnv SMTP_SSL "1"
+SetEnv MAIL_TO "flumen@flumenconsultoria.com.br"
+
+# ======== REDIRECIONAMENTO DE URLs AMIGÁVEIS ========
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1? [NC,L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.php$ [NC]
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
+
+# ======== PROTEÇÃO DE ARQUIVOS SENSÍVEIS ========
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+Options -Indexes
+
