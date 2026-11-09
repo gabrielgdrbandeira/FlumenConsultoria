@@ -198,10 +198,9 @@
     font-style: italic;
     color: var(--cor-azul-medio);
     border-left: 5px solid var(--cor-verde-destaque);
-    padding-left: 25px;
+    padding: 25px;
     margin: 40px 0;
     background-color: var(--cor-fundo-claro);
-    padding: 25px;
     border-radius: 0 8px 8px 0;
 }
 
@@ -237,21 +236,153 @@
 .share-btn.linkedin { background-color: #0077b5; }
 .share-btn.facebook { background-color: #1877f2; }
 
-/* Responsividade do Artigo */
-@media (max-width: 768px) {
-    .article-title { font-size: 2rem; }
-    .article-subtitle { font-size: 1.1rem; }
-    .article-content { font-size: 1.05rem; }
-    .article-content blockquote { font-size: 1.2rem; }
+/* === ESTILOS DO MODAL DE NOTÍCIAS === */
+
+/* Fundo escuro e desfocado */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(16, 53, 88, 0.7); /* Azul escuro com transparência */
+    backdrop-filter: blur(8px); /* EFEITO DE DESFOQUE */
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Responsividade da Página de Notícias */
+/* Classe para ativar o modal */
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* A caixa branca da notícia */
+.modal-box {
+    background-color: var(--cor-branco);
+    width: 90%;
+    max-width: 800px;
+    max-height: 90vh; /* Não deixa ficar maior que a tela */
+    overflow-y: auto; /* Adiciona barra de rolagem se o texto for grande */
+    border-radius: 12px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-overlay.active .modal-box {
+    transform: translateY(0);
+}
+
+/* Botão de Fechar (X) */
+.fechar-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--cor-texto-escuro);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.3s ease;
+}
+
+.fechar-modal:hover {
+    color: var(--cor-verde-destaque);
+}
+
+/* Imagem de topo do Modal */
+.modal-img-container {
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    background-color: var(--cor-fundo-claro, #f5f5f5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-img-container img {
+    width: 100%;
+    height: auto;
+    max-height: 45vh;
+    object-fit: contain;
+    display: block;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Conteúdo interno do Modal */
+.modal-conteudo {
+    padding: 40px;
+}
+
+.modal-data {
+    color: #888;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.modal-titulo {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-azul-escuro);
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.modal-texto {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+.modal-texto p {
+    margin-bottom: 20px;
+}
+
+.modal-texto h3 {
+    font-family: var(--fonte-titulo);
+    color: var(--cor-azul-medio);
+    margin: 30px 0 15px;
+}
+
+/* Esconde a barra de rolagem do body quando o modal abre */
+body.modal-aberto {
+    overflow: hidden;
+}
+
+/* === RESPONSIVIDADE === */
+
+/* Tablets e telas médias */
 @media (max-width: 900px) {
     .news-page-grid {
         grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
     }
 }
 
+/* Mobile e telas pequenas */
+@media (max-width: 768px) {
+    /* Artigo */
+    .article-title { font-size: 2rem; }
+    .article-subtitle { font-size: 1.1rem; }
+    .article-content { font-size: 1.05rem; }
+    .article-content blockquote { font-size: 1.2rem; }
+    
+    /* Modal */
+    .modal-conteudo { padding: 25px; }
+    .modal-titulo { font-size: 1.8rem; }
+    .modal-img-container img { max-height: 35vh; }
+}
+
+/* Mobile pequeno */
 @media (max-width: 600px) {
     .news-page-grid {
         grid-template-columns: 1fr; /* 1 coluna no celular */

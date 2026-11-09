@@ -14,129 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
     <!-- Estilos do Modal (Você pode mover isso para o seu noticias.css depois se preferir) -->
-    <style>
-        /* Fundo escuro e desfocado */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(16, 53, 88, 0.7); /* Azul escuro com transparência */
-            backdrop-filter: blur(8px); /* EFEITO DE DESFOQUE */
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        /* Classe para ativar o modal */
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* A caixa branca da notícia */
-        .modal-box {
-            background-color: var(--cor-branco);
-            width: 90%;
-            max-width: 800px;
-            max-height: 90vh; /* Não deixa ficar maior que a tela */
-            overflow-y: auto; /* Adiciona barra de rolagem se o texto for grande */
-            border-radius: 12px;
-            position: relative;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: translateY(0);
-        }
-
-        /* Botão de Fechar (X) */
-        .fechar-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            color: var(--cor-texto-escuro);
-            background: none;
-            border: none;
-            cursor: pointer;
-            z-index: 10;
-            transition: color 0.3s ease;
-        }
-
-        .fechar-modal:hover {
-            color: var(--cor-verde-destaque);
-        }
-
-        /* Imagem de topo do Modal */
-        .modal-img-container {
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-            border-radius: 12px 12px 0 0;
-        }
-
-        .modal-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Conteúdo interno do Modal */
-        .modal-conteudo {
-            padding: 40px;
-        }
-
-        .modal-data {
-            color: #888;
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .modal-titulo {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-azul-escuro);
-            font-size: 2.2rem;
-            line-height: 1.2;
-            margin-bottom: 25px;
-        }
-
-        .modal-texto {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #444;
-        }
-
-        .modal-texto p {
-            margin-bottom: 20px;
-        }
-
-        .modal-texto h3 {
-            font-family: var(--fonte-titulo);
-            color: var(--cor-azul-medio);
-            margin: 30px 0 15px;
-        }
-
-        /* Esconde a barra de rolagem do body quando o modal abre */
-        body.modal-aberto {
-            overflow: hidden;
-        }
-
-        @media(max-width: 768px) {
-            .modal-conteudo { padding: 25px; }
-            .modal-titulo { font-size: 1.8rem; }
-            .modal-img-container { height: 200px; }
-        }
-    </style>
+    
 </head>
 <body>
 
@@ -176,42 +54,10 @@
         <!-- === LISTA DE NOTÍCIAS === -->
         <section class="news-feed">
             <div class="container">
-                
-                <div class="news-page-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;">
-                    
-                    <!-- Notícia 1 -->
-                    <article class="news-card big-card" style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;">
-                        <div class="news-img" style="height: 220px;">
-                            <img src="imagens/noticia1.jpg" alt="Mural mico-leão-preto" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="news-content" style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
-                            <span class="news-date" style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">28 Fev 2026</span>
-                            <h3 style="font-size: 1.1rem; color: var(--cor-azul-escuro); margin-bottom: 10px;">Mural sobre o mico-leão-preto homenageia a espécie</h3>
-                            <p class="news-excerpt" style="font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5;">
-                                Um projeto artístico que une conservação e comunidade local, destacando a importância da preservação do primata...
-                            </p>
-                            <!-- Note o onclick chamando o ID 1 -->
-                            <a href="#" onclick="abrirModal(1); return false;" class="read-more" style="color: var(--cor-verde-destaque); font-weight: bold; text-decoration: none; margin-top: auto;">Ler matéria completa &rarr;</a>
-                        </div>
-                    </article>
-
-                    <!-- Notícia 2 -->
-                    <article class="news-card big-card" style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; display: flex; flex-direction: column;">
-                        <div class="news-img" style="height: 220px;">
-                            <img src="imagens/noticia2.jpg" alt="Edital de contratação" style="width: 100%; height: 100%; object-fit: cover;">
-                        </div>
-                        <div class="news-content" style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column;">
-                            <span class="news-date" style="font-size: 0.8rem; color: #888; margin-bottom: 10px;">20 Fev 2026</span>
-                            <h3 style="font-size: 1.1rem; color: var(--cor-azul-escuro); margin-bottom: 10px;">Aberto edital de contratação para vagas de estágio</h3>
-                            <p class="news-excerpt" style="font-size: 0.9rem; color: #666; margin-bottom: 20px; line-height: 1.5;">
-                                O Programa de Conservação anuncia novas oportunidades para estudantes de biologia e engenharia ambiental...
-                            </p>
-                            <!-- Note o onclick chamando o ID 2 -->
-                            <a href="#" onclick="abrirModal(2); return false;" class="read-more" style="color: var(--cor-verde-destaque); font-weight: bold; text-decoration: none; margin-top: auto;">Ler matéria completa &rarr;</a>
-                        </div>
-                    </article>
-
+                <div 
+                id="lista-noticias" class="news-page-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px;">
                 </div>
+
             </div>
         </section>
     </main>
@@ -265,31 +111,133 @@
 
     <!-- === JAVASCRIPT DO MODAL E BANCO DE DADOS === -->
     <script>
-        // 1. BANCO DE DADOS DE NOTÍCIAS (Você só edita os textos longos aqui!)
+        // 1. BANCO DE DADOS DE NOTÍCIAS (você só edita os textos longos aqui)
         const bancoDeNoticias = {
             1: {
-                imagem: "imagens/noticia1.jpg",
-                data: "28 de fevereiro de 2026 • Leitura: 3 min",
-                titulo: "Mural sobre o mico-leão-preto homenageia a espécie e presenteia a comunidade",
+                imagem: "imagens/NoticiaColabLeiLicenciamento.png",
+                data: "4 de fevereiro de 2026 • Leitura: 1 min e 30 seg",
+                titulo: "Brasil: Entrada em vigor da Lei Geral do Licenciamento Ambiental",
                 texto: `
-                    <p>Nesta última semana, o município, que abriga mais de 65% da população do mico-leão-preto, recebeu um presente especial. Um grande mural artístico foi inaugurado no centro da cidade, com o objetivo de homenagear a espécie e sensibilizar a população sobre a importância da sua conservação.</p>
-                    <p>A iniciativa, apoiada por diversos parceiros locais e especialistas ambientais, busca transformar espaços urbanos em ferramentas de educação ambiental. "A arte tem o poder de comunicar onde, muitas vezes, relatórios técnicos não chegam", afirma a coordenação do projeto.</p>
-                    <h3>A importância do Mico-Leão-Preto</h3>
-                    <p>Endêmico da Mata Atlântica do interior paulista, a espécie já foi considerada extinta na natureza. Hoje, graças a intensos esforços de conservação e pesquisa, tem uma chance de sobrevivência.</p>
-                    <p>A Flumen Consultoria ressalta que a preservação de espécies bandeira está diretamente ligada à saúde dos ecossistemas como um todo, incluindo a integridade das águas continentais.</p>
-                `
+<p>A Lei nº 15.190/2025, conhecida como Lei Geral do Licenciamento Ambiental, passou a produzir efeitos em 4 de fevereiro de 2026, após o término do período de vacância de 180 dias desde sua sanção presidencial. A norma estabelece regras gerais para o licenciamento de atividades ou empreendimentos que utilizam recursos ambientais ou que possam causar impactos ao meio ambiente.</p>
+<p>O objetivo central da nova legislação é uniformizar e modernizar o sistema de licenciamento ambiental no país, criando diretrizes comuns para a atuação dos órgãos ambientais da União, estados e municípios integrantes do Sistema Nacional do Meio Ambiente (Sisnama). Entre os instrumentos previstos estão diferentes modalidades de licença, como Licença Prévia (LP), Licença de Instalação (LI), Licença de Operação (LO) e outros formatos simplificados, aplicados conforme o porte e o potencial poluidor do empreendimento.</p>
+<p>A lei também busca reduzir a burocracia e tornar os processos mais ágeis, inclusive com a previsão de tramitação eletrônica e novos tipos de licenciamento, como a Licença por Adesão e Compromisso (LAC) e a Licença Ambiental Única (LAU), voltadas a atividades de menor impacto ambiental. Ao mesmo tempo, mantém a exigência de estudos técnicos robustos, como o Estudo de Impacto Ambiental (EIA) para empreendimentos com potencial significativo de degradação ambiental.</p>
+<h3>Relevância para o meio ambiente e para a Flumen</h3>
+<p>Nesse contexto, serviços especializados em adequação regulatória, elaboração ou revisão de estudos ambientais (EIA/RIMA) e acompanhamento técnico de licenciamento tendem a ganhar maior demanda.</p>
+                `.trim(),
             },
+
             2: {
-                imagem: "imagens/noticia2.jpg",
-                data: "20 de fevereiro de 2026 • Leitura: 2 min",
-                titulo: "Aberto edital de contratação para vagas de estágio no Programa de Conservação",
+                imagem: "imagens/noticia_lei.jpg",
+                data: "Março de 2026 • Leitura: 1 min e 30 seg",
+                titulo: "O verdadeiro custo do licenciamento: A natureza sob nova lei",
                 texto: `
-                    <p>A Flumen Consultoria, em parceria com institutos de pesquisa, anuncia a abertura de novas vagas de estágio para estudantes de Ciências Biológicas, Engenharia Ambiental e áreas correlatas.</p>
-                    <p>Os estagiários terão a oportunidade de atuar diretamente em campo, auxiliando na coleta de dados de qualidade de água, levantamento de fauna aquática e apoio em projetos de restauração fluvial.</p>
-                    <h3>Como participar</h3>
-                    <p>Os interessados devem enviar o currículo e histórico escolar atualizado para o nosso e-mail oficial até o dia 10 de março. O processo seletivo incluirá análise de currículo e entrevista técnica online.</p>
-                `
-            }
+<p>A nova Lei Geral do Licenciamento Ambiental entrou em vigor, trazendo mudanças profundas na forma como empreendimentos são avaliados no Brasil. Sob a justificativa de "desburocratização", a legislação levanta sérias preocupações entre ambientalistas e cientistas.</p>
+<p>Ao simplificar procedimentos e permitir maior uso de autodeclarações, a legislação pode reduzir a profundidade das análises em casos que exigem olhar técnico cuidadoso. Isso acende um alerta especialmente para ambientes frágeis, como rios, nascentes e áreas úmidas.</p>
+<h3>O que está em jogo</h3>
+<p>Quando etapas críticas são flexibilizadas, cresce o risco de subestimar impactos cumulativos e de longo prazo — justamente os que mais afetam a biodiversidade e os serviços ecossistêmicos. O licenciamento não deve ser visto como um entrave, mas como uma garantia de responsabilidade ambiental.</p>
+<p>Para quem atua com diagnóstico, monitoramento e restauração, o momento pede atenção redobrada: mais clareza técnica, melhor comunicação e acompanhamento constante para que o desenvolvimento não venha à custa da integridade dos nossos biomas.</p>
+                `.trim(),
+            },
+
+            3: {
+                imagem: "imagens/noticia_oceano.jpg",
+                data: "Março de 2026 • Leitura: 2 min",
+                titulo: "A proteção dos mares começa no coração dos rios",
+                texto: `
+<p>A Estratégia Nacional "Oceano sem Plástico" (2025-2030) entra em uma fase crucial de implementação, reforçando uma verdade inegável: a salvação dos mares depende da saúde das águas continentais.</p>
+<p>Rios urbanos e bacias hidrográficas funcionam como as principais rotas de transporte do lixo plástico até o litoral. O que é descartado nas ruas e nas margens de córregos, mais cedo ou mais tarde, encontra o caminho do oceano.</p>
+<h3>Da nascente ao mar</h3>
+<p>Conter o problema na origem é a medida mais eficiente: gestão de resíduos, educação ambiental, drenagem urbana mais inteligente e infraestrutura de coleta. Somam-se a isso ações de contenção, como barreiras e sistemas de filtragem em pontos estratégicos da rede hídrica.</p>
+<p>Proteger os mares, portanto, começa no coração dos rios. Reduzir a poluição plástica nas águas continentais é um passo essencial para preservar a biodiversidade aquática e evitar o sufocamento silencioso de ecossistemas costeiros e marinhos.</p>
+                `.trim(),
+            },
+
+            4: {
+                imagem: "imagens/noticia_calendario.jpg",
+                data: "Março e Abril de 2026 • Leitura: 1 min",
+                titulo: "Dias de Luta: O chamado do calendário ecológico",
+                texto: `
+<p>Os meses de março e abril marcam um período de intensa mobilização em prol do nosso planeta. Destacamos o <strong>Dia Mundial da Água (22 de março)</strong>, que reforça a urgência da paz hídrica e da gestão compartilhada de bacias, e o <strong>Dia da Botânica (17 de abril)</strong>, essencial para lembrarmos do papel insubstituível das matas ciliares.</p>
+<p>Essas datas funcionam como lembretes públicos do que sustenta a vida: água, vegetação e equilíbrio ecológico. Em tempos de crise climática, elas deixam de ser simbólicas e passam a ser urgentes.</p>
+<h3>Um chamado à ação</h3>
+<p>A proteção de nascentes, a recuperação de matas ciliares e o uso responsável da água não se resolvem em um único dia. São metas contínuas, que dependem de políticas públicas, participação social e decisões responsáveis no território.</p>
+<p>Mais do que um calendário, é um compromisso: cada gota importa, todo dia — e cada ação de preservação conta para o futuro das bacias hidrográficas e das comunidades que vivem delas.</p>
+                `.trim(),
+            },
+
+            5: {
+                imagem: "imagens/noticia_micro.jpg",
+                data: "Fevereiro de 2026 • Leitura: 2 min",
+                titulo: "O invisível essencial: Descobertas na base da vida aquática",
+                texto: `
+<p>A vida microscópica, muitas vezes ignorada pelos olhos humanos, é a base que sustenta o equilíbrio de todos os ecossistemas aquáticos. Recentes descobertas científicas revelaram novas bactérias e microrganismos incrivelmente adaptáveis em águas continentais, funcionando como vitais bioindicadores de qualidade ambiental.</p>
+<p>Esses organismos respondem rapidamente a mudanças no ambiente e, por isso, ajudam a “ler” a qualidade da água antes mesmo que problemas maiores apareçam. Em outras palavras: são sinais precoces do que está acontecendo nos rios.</p>
+<h3>Por que isso importa</h3>
+<p>Compreender essa “saúde invisível” abre portas para estratégias mais naturais de manejo e recuperação, como a biorremediação. Ao invés de apenas tratar sintomas, podemos atuar nas causas, favorecendo processos ecológicos que estabilizam o sistema.</p>
+<p>Proteger rios significa preservar a vida em todas as escalas — do maior peixe aos microrganismos mais essenciais. A base microscópica sustenta toda a cadeia e merece a mesma atenção.</p>
+                `.trim(),
+            },
+
+            6: {
+                imagem: "imagens/noticia_restauracao.jpg",
+                data: "Fevereiro de 2026 • Leitura: 1 min e 30 seg",
+                titulo: "O pulso das águas: O desafio da restauração fluvial no Brasil",
+                texto: `
+<p>Os rios brasileiros continuam sob forte pressão. Dados recentes apontam uma estagnação e, em alguns casos, a piora na qualidade da água em diversas bacias, impulsionada pelo crescimento desordenado e pela falta de saneamento básico.</p>
+<p>O resultado aparece em múltiplas frentes: perda de biodiversidade aquática, redução de serviços ecossistêmicos, riscos à saúde e maior vulnerabilidade a eventos extremos. Quando um rio perde sua dinâmica natural, toda a paisagem sente.</p>
+<h3>Restauração como política, não só compensação</h3>
+<p>O movimento global de restauração fluvial traz esperança. Projetos de renaturalização ao redor do mundo mostram que ecossistemas degradados podem voltar a fluir mais livres e resilientes, desde que exista planejamento, monitoramento e continuidade.</p>
+<p>Para o Brasil, a urgência é clara: tratar a restauração ecológica e a proteção das várzeas como prioridade estratégica — integrando saneamento, ordenamento territorial e soluções baseadas na natureza para devolver vida aos nossos rios.</p>
+                `.trim(),
+            },
+
+            7: {
+                imagem: "imagens/Imagem_Rio_NovaLei.png",
+                data: "Abril de 2026 • Leitura: 2 min e 30 seg",
+                titulo: "O que muda na lista de peixes e invertebrados aquáticos ameaçados",
+                texto: `
+                <h3>O que é a Portaria 1.667?</h3>
+                <p>A Portaria GM/MMA N° 1.667, de 27 de abril de 2026, reconhece formalmente as espécies de peixes e invertebrados aquáticos da fauna brasileira que se encontram ameaçadas de extinção, atualizando a Lista Nacional Oficial de Espécies da Fauna Ameaçadas de Extinção — Peixes e Invertebrados Aquáticos.</p>
+                <p>Trata-se de um documento de referência obrigatória em estudos ambientais, EIAs, RIMAs e projetos de conservação que envolvam ambientes aquáticos.</p>
+                <p>2014 — Publicação da lista anterior, primeira compilação abrangente de espécies aquáticas ameaçadas.</p>
+                <p>2022 — Atualização parcial da lista, com revisão de categorias de risco de algumas espécies.</p>
+                <p>Abril 2026 — Publicação da Portaria 1.667, que substitui integralmente a versão anterior.</p>
+                <h3>Por que essa atualização importa?</h3>
+                <p>A lista oficial é o instrumento que determina quais espécies recebem proteção legal no Brasil. Alterações em sua composição têm impacto direto em:</p>
+                <h3>Categorias de ameaça utilizadas</h3>
+                <p>A portaria segue os critérios da IUCN (União Internacional para a Conservação da Natureza), adotados pelo ICMBio, distribuindo as espécies nas seguintes categorias:</p>
+                <ul>
+                    <li>EX — Extinta</li>
+                    <li>EW — Extinta na Natureza</li>
+                    <li>CR — Criticamente em Perigo</li>
+                    <li>EN — Em Perigo</li>
+                    <li>VU — Vulnerável</li>
+                </ul>
+                <h3>Alterações na forma de trabalho</h3>
+                <p>A Flumen Consultoria está acompanhando de perto as implicações da Portaria 1.667/2026 e pode apoiar sua empresa na adequação de estudos ambientais, diagnósticos de fauna aquática e revisão de programas de monitoramento.</p>
+                `.trim(),
+            },
+
+            8: {
+            imagem: "imagens/Retrospectiva15Anos.JPG",
+            data: "Julho de 2026 • Leitura: 1 min e 30 seg",
+            titulo: "Retrospectiva: 15 Anos de Flumen",
+            texto: `
+            <h3>Encontros Institucionais com Empresas Parceiras</h3>
+            <p>Priorizamos a parceria com nossos clientes e o objetivo não é apenas prestar serviços de consultoria, mas também, atender e fidelizar todos os clientes garantindo a sua satisfaçãol. Por meio de encontros institucionais, buscamos soluções conjuntas em prol do meio ambiente, além de cultivar a curiosidade e o aprendizado contínuo com as novas gerações.</p>
+            
+            <h3>Congresso em Ilhéus</h3>
+            <p>Em 2024, marcamos presença no Simpósio de Biodiversidade Aquática da Mata Atlântica (SIMBAMA), em Ilhéus (BA). Entendemos a importância vital de estar na linha de frente das discussões em eventos de grande relevância sobre a biodiversidade aquática e a conservação da Mata Atlântica.</p>
+            
+            <h3>Atualização e Nivelamento da Equipe</h3>
+            <p>Para assegurar uma entrega de qualidade aos nossos clientes, nossa equipe participa constantemente de cursos e treinamentos. Manter nosso conhecimento atualizado é o que garante o padrão de excelência nos serviços que prestamos, refletindo o compromisso de cada um de nossos profissionais.</p>
+            
+            <h3>Parceria CRBio</h3>
+            <p>Tivemos a honra de participar como palestrantes no 1º Congresso de Biólogos da 4ª Região, realizado em Belo Horizonte (MG) no ano de 2025, reforçando nosso compromisso ético e técnico com o desenvolvimento científico.</p>
+            `.trim(),
+        },
+
+
         };
 
         // 2. FUNÇÃO PARA ABRIR O MODAL
@@ -325,5 +273,7 @@
             }
         });
     </script>
+
+    <script src="script.js"></script>
 </body>
 </html>
