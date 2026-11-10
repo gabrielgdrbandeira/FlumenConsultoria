@@ -13,85 +13,8 @@
      texto:        HTML; o primeiro <p> vira o resumo do card
    ========================================================================== */
 const bancoDeNoticias = {
+            
             1: {
-                imagem: "imagens/NoticiaColabLeiLicenciamento.png",
-                data: "4 de fevereiro de 2026 • Leitura: 1 min e 30 seg",
-                titulo: "Brasil: Entrada em vigor da Lei Geral do Licenciamento Ambiental",
-                texto: `
-<p>A Lei nº 15.190/2025, conhecida como Lei Geral do Licenciamento Ambiental, passou a produzir efeitos em 4 de fevereiro de 2026, após o término do período de vacância de 180 dias desde sua sanção presidencial. A norma estabelece regras gerais para o licenciamento de atividades ou empreendimentos que utilizam recursos ambientais ou que possam causar impactos ao meio ambiente.</p>
-<p>O objetivo central da nova legislação é uniformizar e modernizar o sistema de licenciamento ambiental no país, criando diretrizes comuns para a atuação dos órgãos ambientais da União, estados e municípios integrantes do Sistema Nacional do Meio Ambiente (Sisnama). Entre os instrumentos previstos estão diferentes modalidades de licença, como Licença Prévia (LP), Licença de Instalação (LI), Licença de Operação (LO) e outros formatos simplificados, aplicados conforme o porte e o potencial poluidor do empreendimento.</p>
-<p>A lei também busca reduzir a burocracia e tornar os processos mais ágeis, inclusive com a previsão de tramitação eletrônica e novos tipos de licenciamento, como a Licença por Adesão e Compromisso (LAC) e a Licença Ambiental Única (LAU), voltadas a atividades de menor impacto ambiental. Ao mesmo tempo, mantém a exigência de estudos técnicos robustos, como o Estudo de Impacto Ambiental (EIA) para empreendimentos com potencial significativo de degradação ambiental.</p>
-<h3>Relevância para o meio ambiente e para a Flumen</h3>
-<p>Nesse contexto, serviços especializados em adequação regulatória, elaboração ou revisão de estudos ambientais (EIA/RIMA) e acompanhamento técnico de licenciamento tendem a ganhar maior demanda.</p>
-                `.trim(),
-            },
-
-            2: {
-                imagem: "imagens/noticia_lei.jpg",
-                data: "Março de 2026 • Leitura: 1 min e 30 seg",
-                titulo: "O verdadeiro custo do licenciamento: A natureza sob nova lei",
-                texto: `
-<p>A nova Lei Geral do Licenciamento Ambiental entrou em vigor, trazendo mudanças profundas na forma como empreendimentos são avaliados no Brasil. Sob a justificativa de "desburocratização", a legislação levanta sérias preocupações entre ambientalistas e cientistas.</p>
-<p>Ao simplificar procedimentos e permitir maior uso de autodeclarações, a legislação pode reduzir a profundidade das análises em casos que exigem olhar técnico cuidadoso. Isso acende um alerta especialmente para ambientes frágeis, como rios, nascentes e áreas úmidas.</p>
-<h3>O que está em jogo</h3>
-<p>Quando etapas críticas são flexibilizadas, cresce o risco de subestimar impactos cumulativos e de longo prazo — justamente os que mais afetam a biodiversidade e os serviços ecossistêmicos. O licenciamento não deve ser visto como um entrave, mas como uma garantia de responsabilidade ambiental.</p>
-<p>Para quem atua com diagnóstico, monitoramento e restauração, o momento pede atenção redobrada: mais clareza técnica, melhor comunicação e acompanhamento constante para que o desenvolvimento não venha à custa da integridade dos nossos biomas.</p>
-                `.trim(),
-            },
-
-            3: {
-                imagem: "imagens/noticia_oceano.jpg",
-                data: "Março de 2026 • Leitura: 2 min",
-                titulo: "A proteção dos mares começa no coração dos rios",
-                texto: `
-<p>A Estratégia Nacional "Oceano sem Plástico" (2025-2030) entra em uma fase crucial de implementação, reforçando uma verdade inegável: a salvação dos mares depende da saúde das águas continentais.</p>
-<p>Rios urbanos e bacias hidrográficas funcionam como as principais rotas de transporte do lixo plástico até o litoral. O que é descartado nas ruas e nas margens de córregos, mais cedo ou mais tarde, encontra o caminho do oceano.</p>
-<h3>Da nascente ao mar</h3>
-<p>Conter o problema na origem é a medida mais eficiente: gestão de resíduos, educação ambiental, drenagem urbana mais inteligente e infraestrutura de coleta. Somam-se a isso ações de contenção, como barreiras e sistemas de filtragem em pontos estratégicos da rede hídrica.</p>
-<p>Proteger os mares, portanto, começa no coração dos rios. Reduzir a poluição plástica nas águas continentais é um passo essencial para preservar a biodiversidade aquática e evitar o sufocamento silencioso de ecossistemas costeiros e marinhos.</p>
-                `.trim(),
-            },
-
-            4: {
-                imagem: "imagens/noticia_calendario.jpg",
-                data: "Março e Abril de 2026 • Leitura: 1 min",
-                titulo: "Dias de Luta: O chamado do calendário ecológico",
-                texto: `
-<p>Os meses de março e abril marcam um período de intensa mobilização em prol do nosso planeta. Destacamos o <strong>Dia Mundial da Água (22 de março)</strong>, que reforça a urgência da paz hídrica e da gestão compartilhada de bacias, e o <strong>Dia da Botânica (17 de abril)</strong>, essencial para lembrarmos do papel insubstituível das matas ciliares.</p>
-<p>Essas datas funcionam como lembretes públicos do que sustenta a vida: água, vegetação e equilíbrio ecológico. Em tempos de crise climática, elas deixam de ser simbólicas e passam a ser urgentes.</p>
-<h3>Um chamado à ação</h3>
-<p>A proteção de nascentes, a recuperação de matas ciliares e o uso responsável da água não se resolvem em um único dia. São metas contínuas, que dependem de políticas públicas, participação social e decisões responsáveis no território.</p>
-<p>Mais do que um calendário, é um compromisso: cada gota importa, todo dia — e cada ação de preservação conta para o futuro das bacias hidrográficas e das comunidades que vivem delas.</p>
-                `.trim(),
-            },
-
-            5: {
-                imagem: "imagens/noticia_micro.jpg",
-                data: "Fevereiro de 2026 • Leitura: 2 min",
-                titulo: "O invisível essencial: Descobertas na base da vida aquática",
-                texto: `
-<p>A vida microscópica, muitas vezes ignorada pelos olhos humanos, é a base que sustenta o equilíbrio de todos os ecossistemas aquáticos. Recentes descobertas científicas revelaram novas bactérias e microrganismos incrivelmente adaptáveis em águas continentais, funcionando como vitais bioindicadores de qualidade ambiental.</p>
-<p>Esses organismos respondem rapidamente a mudanças no ambiente e, por isso, ajudam a “ler” a qualidade da água antes mesmo que problemas maiores apareçam. Em outras palavras: são sinais precoces do que está acontecendo nos rios.</p>
-<h3>Por que isso importa</h3>
-<p>Compreender essa “saúde invisível” abre portas para estratégias mais naturais de manejo e recuperação, como a biorremediação. Ao invés de apenas tratar sintomas, podemos atuar nas causas, favorecendo processos ecológicos que estabilizam o sistema.</p>
-<p>Proteger rios significa preservar a vida em todas as escalas — do maior peixe aos microrganismos mais essenciais. A base microscópica sustenta toda a cadeia e merece a mesma atenção.</p>
-                `.trim(),
-            },
-
-            6: {
-                imagem: "imagens/noticia_restauracao.jpg",
-                data: "Fevereiro de 2026 • Leitura: 1 min e 30 seg",
-                titulo: "O pulso das águas: O desafio da restauração fluvial no Brasil",
-                texto: `
-<p>Os rios brasileiros continuam sob forte pressão. Dados recentes apontam uma estagnação e, em alguns casos, a piora na qualidade da água em diversas bacias, impulsionada pelo crescimento desordenado e pela falta de saneamento básico.</p>
-<p>O resultado aparece em múltiplas frentes: perda de biodiversidade aquática, redução de serviços ecossistêmicos, riscos à saúde e maior vulnerabilidade a eventos extremos. Quando um rio perde sua dinâmica natural, toda a paisagem sente.</p>
-<h3>Restauração como política, não só compensação</h3>
-<p>O movimento global de restauração fluvial traz esperança. Projetos de renaturalização ao redor do mundo mostram que ecossistemas degradados podem voltar a fluir mais livres e resilientes, desde que exista planejamento, monitoramento e continuidade.</p>
-<p>Para o Brasil, a urgência é clara: tratar a restauração ecológica e a proteção das várzeas como prioridade estratégica — integrando saneamento, ordenamento territorial e soluções baseadas na natureza para devolver vida aos nossos rios.</p>
-                `.trim(),
-            },
-
-            7: {
                 imagem: "imagens/Imagem_Rio_NovaLei.png",
                 data: "Abril de 2026 • Leitura: 2 min e 30 seg",
                 titulo: "O que muda na lista de peixes e invertebrados aquáticos ameaçados",
@@ -118,7 +41,7 @@ const bancoDeNoticias = {
                 `.trim(),
             },
 
-            8: {
+            2: {
             imagem: "imagens/Retrospectiva15Anos.JPG",
             data: "Julho de 2026 • Leitura: 1 min e 30 seg",
             titulo: "Retrospectiva: 15 Anos de Flumen",
@@ -138,7 +61,7 @@ const bancoDeNoticias = {
         },
 
 
-                9: {
+            3: {
             imagem: "imagens/noticia-limnologia.jpg",
             data: "24 de julho de 2026 • Leitura: 2 min",
             titulo: "Flumen participa do X Congresso Brasileiro de Limnologia, em Juiz de Fora",
@@ -154,8 +77,8 @@ const bancoDeNoticias = {
             `.trim(),
         },
 
-        10: {
-            imagem: "imagens/noticia-dia-do-biologo.jpg",
+        4: {
+            imagem: "imagens/noticia-dia-do-biologo.JPG",
             data: "3 de setembro de 2026 • Leitura: 2 min",
             titulo: "Dia do Biólogo: ciência que transforma, conhecimento que preserva",
             texto: `
@@ -178,8 +101,8 @@ const bancoDeNoticias = {
             `.trim(),
         },
 
-        11: {
-            imagem: "imagens/noticia-damsweek.jpg",
+        5: {
+            imagem: "imagens/noticia-damsweek.png",
             data: "26 de setembro de 2026 • Leitura: 3 min",
             titulo: "Parceria entre Flumen e Ecodinâmica leva ao DamsWeek os resultados do monitoramento limnológico da UHE Guilman Amorim",
             tituloCurto: "Parceria Flumen e Ecodinâmica é destaque no DamsWeek",
