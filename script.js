@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let htmlNoticias = '';
 
       // 3. Faz um loop por cada notícia dentro do seu banco
-      for (const id in bancoDeNoticias) {
+      for (const id of Object.keys(bancoDeNoticias).reverse()) {
           const noticia = bancoDeNoticias[id];
 
           // 4. Truque para extrair só o texto do primeiro parágrafo para usar como resumo
