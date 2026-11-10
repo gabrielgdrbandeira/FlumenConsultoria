@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let htmlNoticias = '';
 
       // 3. Faz um loop por cada notícia dentro do seu banco
-      for (const id of Object.keys(bancoDeNoticias).reverse()) {
+      for (const id in bancoDeNoticias) {
           const noticia = bancoDeNoticias[id];
 
           // 4. Truque para extrair só o texto do primeiro parágrafo para usar como resumo
@@ -106,5 +106,43 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // 6. Injeta todo o HTML gerado de uma só vez dentro da sua div vazia
       containerNoticias.innerHTML = htmlNoticias;
+
+      // 7. Se o link veio da página inicial (noticias.html#noticia-10), abre essa notícia direto
+      const alvo = location.hash.match(/^#noticia-(\d+)$/);
+      if (alvo && typeof abrirModal === 'function') {
+          abrirModal(alvo[1]);
+      }
+  }
+});
+
+// === CARDS AUTOMÁTICOS DA PÁGINA INICIAL (5 notícias mais recentes) ===
+document.addEventListener("DOMContentLoaded", function() {
+  const containerHome = document.getElementById('noticias-home');
+
+  // Só executa na página inicial e se o banco de notícias foi carregado
+  if (containerHome && typeof bancoDeNoticias !== 'undefined') {
+      // Maior número = mais recente
+      const ids = Object.keys(bancoDeNoticias)
+          .map(Number)
+          .sort((a, b) => b - a)
+          .slice(0, 5);
+
+      containerHome.innerHTML = ids.map(id => {
+          const noticia = bancoDeNoticias[id];
+          const titulo = noticia.tituloCurto || noticia.titulo;
+          const data = noticia.data.split('•')[0].trim(); // tira o "Leitura: X min"
+
+          return `
+              <a class="news-card" href="noticias.html#noticia-${id}" style="text-decoration: none; color: inherit;">
+                  <div class="news-img">
+                      <img src="${noticia.imagem}" alt="${titulo}" loading="lazy">
+                  </div>
+                  <div class="news-content">
+                      <h3>${titulo}</h3>
+                      <span class="news-date">${data}</span>
+                  </div>
+              </a>
+          `;
+      }).join('');
   }
 });
